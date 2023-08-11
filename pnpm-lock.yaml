@@ -35,6 +35,9 @@ dependencies:
   babel-plugin-transform-inline-environment-variables:
     specifier: ^0.4.4
     version: 0.4.4
+  date-fns:
+    specifier: ^2.30.0
+    version: 2.30.0
   expo:
     specifier: ~49.0.7
     version: 49.0.7(@babel/core@7.22.10)
@@ -5200,6 +5203,13 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.22.10
+    dev: false
 
   /dayjs@1.11.9:
     resolution: {integrity: sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==}
