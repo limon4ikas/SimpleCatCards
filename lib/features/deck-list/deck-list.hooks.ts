@@ -1,19 +1,23 @@
 import { useMemo, useState } from "react";
 
-import { Deck } from "../../types";
+import { DeckModel } from "../../types";
 
 type UseDeckListConfig = {
-  decks: Deck[];
+  decks: DeckModel[];
 };
 
 export const useDeckList = (config: UseDeckListConfig) => {
-  const { decks } = config;
   const [filterName, setFilterName] = useState("");
 
   const filteredDecks = useMemo(
-    () => decks.filter((deck) => deck.name.startsWith(filterName)),
-    []
+    () =>
+      filterName.length
+        ? config.decks.filter((deck) => deck.name.includes(filterName))
+        : config.decks,
+    [filterName, config]
   );
+
+  console.log(filteredDecks.map((d) => d.name));
 
   return { filterName, setFilterName, filteredDecks };
 };

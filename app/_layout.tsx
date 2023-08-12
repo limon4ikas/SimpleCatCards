@@ -10,7 +10,7 @@ export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(home)",
+  initialRouteName: "/",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -41,9 +41,10 @@ function RootLayoutNav() {
   return (
     <TamaguiProvider config={config}>
       <Theme name={colorScheme === "dark" ? "dark" : "light"}>
-        <Stack>
-          <Stack.Screen name="(home)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack initialRouteName="/overview/index">
+          <Stack.Screen name="index" options={{ title: "Overview" }} />
+          <Stack.Screen name="decks" options={{ title: "Decks" }} />
+          <Stack.Screen name="deck/[id]" options={{ title: "Decks" }} />
         </Stack>
       </Theme>
     </TamaguiProvider>

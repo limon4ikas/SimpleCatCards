@@ -3,12 +3,12 @@ import { TouchableOpacity } from "react-native";
 import { differenceInDays } from "date-fns";
 import { Link } from "expo-router";
 
-import { Deck } from "../../types";
+import { DeckModel } from "../../types";
 import { useDeckList } from "./deck-list.hooks";
 
 export type DeckListProps = {
   label: string;
-  decks: Deck[];
+  decks: DeckModel[];
 };
 
 export function DeckList(props: DeckListProps) {
@@ -17,7 +17,13 @@ export function DeckList(props: DeckListProps) {
 
   return (
     <YStack space="$3.5">
-      <Input flex={1} size="$3" placeholder="Search..." />
+      <Input
+        flex={1}
+        size="$3"
+        placeholder="Search..."
+        value={filterName}
+        onChangeText={setFilterName}
+      />
       <XStack justifyContent="flex-start">
         <Text fontSize={24} fontWeight="bold" fontFamily="$heading">
           {label}
@@ -45,17 +51,14 @@ type DeckListItemProps = {
   name: string;
   cardsCount: number;
   lastEdited: Date;
-  lastAttempted: Date;
+  lastAttempted?: Date;
 };
 
 function DeckListItem(props: DeckListItemProps) {
   const { cardsCount, lastAttempted, lastEdited, name } = props;
 
   return (
-    <Link
-      href={{ pathname: "/(home)/deck/[id]", params: { id: name } }}
-      asChild
-    >
+    <Link href={{ pathname: "/deck/[id]", params: { id: name } }} asChild>
       <TouchableOpacity>
         <YStack space="$2" px="$4" py="$2">
           <XStack>
@@ -67,7 +70,9 @@ function DeckListItem(props: DeckListItemProps) {
               <Text>{cardsCount}</Text>
               <Text>{differenceInDays(lastEdited, new Date())}</Text>
             </XStack>
-            <Text>{differenceInDays(lastAttempted, new Date())}</Text>
+            {lastAttempted ? (
+              <Text>{differenceInDays(lastAttempted, new Date())}</Text>
+            ) : null}
           </XStack>
         </YStack>
       </TouchableOpacity>
