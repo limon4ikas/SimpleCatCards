@@ -17,7 +17,5 @@ export const useDeckList = (config: UseDeckListConfig) => {
     [filterName, config]
   );
 
-  console.log(filteredDecks.map((d) => d.name));
-
   return { filterName, setFilterName, filteredDecks };
 };

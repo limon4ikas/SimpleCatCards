@@ -1,7 +1,9 @@
-import { Input, Text, XStack, YStack } from "tamagui";
+import { Input, Text, View, XStack, YStack } from "tamagui";
 import { TouchableOpacity } from "react-native";
 import { differenceInDays } from "date-fns";
 import { Link } from "expo-router";
+import { Feather } from "@expo/vector-icons";
+import Animated, { SlideInRight, SlideOutLeft } from "react-native-reanimated";
 
 import { DeckModel } from "../../types";
 import { useDeckList } from "./deck-list.hooks";
@@ -25,12 +27,12 @@ export function DeckList(props: DeckListProps) {
         onChangeText={setFilterName}
       />
       <XStack justifyContent="flex-start">
-        <Text fontSize={24} fontWeight="bold" fontFamily="$heading">
+        <Text fontSize="$9" fontWeight="700">
           {label}
         </Text>
       </XStack>
 
-      <YStack space="$2" bg="white" borderRadius="$6">
+      <YStack space="$2" borderRadius="$6">
         {filteredDecks.map((deck) => (
           <DeckListItem
             key={deck.id}
@@ -58,24 +60,43 @@ function DeckListItem(props: DeckListItemProps) {
   const { cardsCount, lastAttempted, lastEdited, name } = props;
 
   return (
-    <Link href={{ pathname: "/deck/[id]", params: { id: name } }} asChild>
-      <TouchableOpacity>
-        <YStack space="$2" px="$4" py="$2">
-          <XStack>
-            <Text>{name}</Text>
-          </XStack>
+    <View bg="white" borderRadius="$5">
+      <Animated.View entering={SlideInRight} exiting={SlideOutLeft}>
+        <Link href={{ pathname: "/deck/[id]", params: { id: name } }} asChild>
+          <TouchableOpacity>
+            <YStack space="$2" px="$4" py="$2">
+              <XStack>
+                <Text fontFamily="$body" fontSize="$5" fontWeight="600">
+                  {name}
+                </Text>
+              </XStack>
 
-          <XStack justifyContent="space-between">
-            <XStack space="$2">
-              <Text>{cardsCount}</Text>
-              <Text>{differenceInDays(lastEdited, new Date())}</Text>
-            </XStack>
-            {lastAttempted ? (
-              <Text>{differenceInDays(lastAttempted, new Date())}</Text>
-            ) : null}
-          </XStack>
-        </YStack>
-      </TouchableOpacity>
-    </Link>
+              <XStack justifyContent="space-between">
+                <XStack space="$2">
+                  <XStack alignItems="center" gap="$2">
+                    <Feather name="layers" size={14} />
+                    <Text fontFamily="$body" fontSize="$4">
+                      {cardsCount}
+                    </Text>
+                  </XStack>
+
+                  <XStack alignItems="center" gap="$2">
+                    <Feather name="edit" size={14} />
+                    <Text fontFamily="$body" fontSize="$4">
+                      {differenceInDays(lastEdited, new Date())}d ago
+                    </Text>
+                  </XStack>
+                </XStack>
+                {lastAttempted ? (
+                  <Text fontFamily="$body" fontSize="$4">
+                    {differenceInDays(lastAttempted, new Date())}d ago
+                  </Text>
+                ) : null}
+              </XStack>
+            </YStack>
+          </TouchableOpacity>
+        </Link>
+      </Animated.View>
+    </View>
   );
 }
