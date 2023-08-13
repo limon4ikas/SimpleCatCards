@@ -177,7 +177,7 @@ function DeckListItem(props: DeckListItemProps) {
                     </XStack>
                     {lastAttempted ? (
                       <Text fontFamily="$rounded" fontSize={14}>
-                        {formatDistanceToNow(lastAttempted)}
+                        {formatDistanceToNow(lastAttempted)} ago
                       </Text>
                     ) : null}
                   </XStack>
