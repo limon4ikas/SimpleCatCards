@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
@@ -7,6 +8,8 @@ import { TamaguiProvider, Theme } from 'tamagui';
 
 import { MyStack } from '../lib/components';
 import config from '../tamagui.config';
+
+const queryClient = new QueryClient();
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -52,15 +55,17 @@ function RootLayoutNav() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <TamaguiProvider config={config}>
-        <Theme name={colorScheme === 'dark' ? 'dark' : 'light'}>
-          <MyStack>
-            <Stack.Screen name="index" options={{ title: 'Overview' }} />
-            <Stack.Screen name="decks" options={{ title: 'Decks' }} />
-            <Stack.Screen name="deck/[id]" options={{ title: 'Decks' }} />
-          </MyStack>
-        </Theme>
-      </TamaguiProvider>
+      <QueryClientProvider client={queryClient}>
+        <TamaguiProvider config={config}>
+          <Theme name={colorScheme === 'dark' ? 'dark' : 'light'}>
+            <MyStack>
+              <Stack.Screen name="index" options={{ title: 'Overview' }} />
+              <Stack.Screen name="decks" options={{ title: 'Decks' }} />
+              <Stack.Screen name="deck/[id]" options={{ title: 'Decks' }} />
+            </MyStack>
+          </Theme>
+        </TamaguiProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 }
