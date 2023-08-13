@@ -1,12 +1,13 @@
-import { Slot } from "expo-router";
-import { ScrollView, YStack } from "tamagui";
+import { Stack } from "expo-router";
 
 export default function DecksLayout() {
   return (
-    <ScrollView flex={1}>
-      <YStack flex={1} paddingTop="$4">
-        <Slot />
-      </YStack>
-    </ScrollView>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="create"
+        options={{ presentation: "modal", headerShown: false }}
+      />
+    </Stack>
   );
 }

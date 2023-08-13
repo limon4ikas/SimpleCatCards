@@ -8,12 +8,12 @@ export type DeckModel = {
   description?: string;
   /** Cards */
   cards: CardModel[];
-  /** Total number of cards in deck */
-  cardsCount: number;
   /** When added/removed cards from deck */
   lastEdited: Date;
   /** When last attempted this deck */
   lastAttempted?: Date;
+  /** Primary color of the deck */
+  color?: string;
 };
 
 /** Single card from deck with question and answer on it */

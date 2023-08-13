@@ -36,9 +36,12 @@ export function DeckList(props: DeckListProps) {
         placeholder="Search..."
         value={filterName}
         onChangeText={setFilterName}
+        fontFamily="$rounded"
+        fontSize={16}
+        fontWeight="400"
       />
       <XStack justifyContent="flex-start">
-        <Text fontSize="$9" fontWeight="700">
+        <Text fontSize="$9" fontWeight="600" fontFamily="$rounded">
           {label}
         </Text>
       </XStack>
@@ -54,6 +57,7 @@ export function DeckList(props: DeckListProps) {
             lastEdited={deck.lastEdited}
             lastAttempted={deck.lastAttempted}
             onDelete={onDeckDelete}
+            color={deck.color}
           />
         ))}
       </YStack>
@@ -73,11 +77,20 @@ type DeckListItemProps = {
   lastEdited: Date;
   lastAttempted?: Date;
   onDelete?: (id: string) => void;
+  color?: string;
 };
 
 function DeckListItem(props: DeckListItemProps) {
-  const { cardsCount, lastAttempted, lastEdited, name, onDelete, id, index } =
-    props;
+  const {
+    cardsCount,
+    lastAttempted,
+    lastEdited,
+    name,
+    onDelete,
+    id,
+    index,
+    color,
+  } = props;
   const [isDisabled, setIsDisabled] = useState(false);
   const x = useSharedValue(0);
   const offsetX = useSharedValue(0);
@@ -131,7 +144,12 @@ function DeckListItem(props: DeckListItemProps) {
               <TouchableOpacity>
                 <YStack space="$2" px="$4" py="$2">
                   <XStack>
-                    <Text fontFamily="$body" fontSize="$5" fontWeight="600">
+                    <Text
+                      fontFamily="$rounded"
+                      fontSize={17}
+                      fontWeight="600"
+                      color={color}
+                    >
                       {name}
                     </Text>
                   </XStack>
@@ -140,21 +158,21 @@ function DeckListItem(props: DeckListItemProps) {
                     <XStack space="$2">
                       <XStack alignItems="center" gap="$2">
                         <Feather name="layers" size={14} />
-                        <Text fontFamily="$body" fontSize="$4">
+                        <Text fontFamily="$rounded" fontSize={14}>
                           {cardsCount}
                         </Text>
                       </XStack>
 
                       <XStack alignItems="center" gap="$2">
                         <Feather name="edit" size={14} />
-                        <Text fontFamily="$body" fontSize="$4">
-                          {differenceInDays(lastEdited, new Date())}d ago
+                        <Text fontFamily="$rounded" fontSize={14}>
+                          {differenceInDays(new Date(), lastEdited)}d ago
                         </Text>
                       </XStack>
                     </XStack>
                     {lastAttempted ? (
-                      <Text fontFamily="$body" fontSize="$4">
-                        {differenceInDays(lastAttempted, new Date())}d ago
+                      <Text fontFamily="$rounded" fontSize={14}>
+                        {differenceInDays(new Date(), lastAttempted)}d ago
                       </Text>
                     ) : null}
                   </XStack>

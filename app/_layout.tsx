@@ -20,6 +20,16 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
     InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+    SFProRounded: require("../assets/fonts/SF-Pro-Rounded-Medium.ttf"),
+    SFProRoundedMedium: require("../assets/fonts/SF-Pro-Rounded-Medium.ttf"),
+    SFProRoundedBlack: require("../assets/fonts/SF-Pro-Rounded-Black.ttf"),
+    SFProRoundedBold: require("../assets/fonts/SF-Pro-Rounded-Bold.ttf"),
+    SFProRoundedHeavy: require("../assets/fonts/SF-Pro-Rounded-Heavy.ttf"),
+    SFProRoundedLight: require("../assets/fonts/SF-Pro-Rounded-Light.ttf"),
+    SFProRoundedRegular: require("../assets/fonts/SF-Pro-Rounded-Regular.ttf"),
+    SFProRoundedSemibold: require("../assets/fonts/SF-Pro-Rounded-Semibold.ttf"),
+    SFProRoundedThin: require("../assets/fonts/SF-Pro-Rounded-Thin.ttf"),
+    SFProRoundedUltralight: require("../assets/fonts/SF-Pro-Rounded-Ultralight.ttf"),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -43,10 +53,9 @@ function RootLayoutNav() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <TamaguiProvider config={config}>
         <Theme name={colorScheme === "dark" ? "dark" : "light"}>
-          <Stack initialRouteName="/overview/index">
+          <Stack>
             <Stack.Screen name="index" options={{ title: "Overview" }} />
             <Stack.Screen name="decks" options={{ title: "Decks" }} />
-            <Stack.Screen name="deck/[id]" options={{ title: "Decks" }} />
           </Stack>
         </Theme>
       </TamaguiProvider>
