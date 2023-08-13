@@ -1,5 +1,5 @@
-import { Link } from "expo-router";
-import { View, YStack, Text } from "tamagui";
+import { Link } from 'expo-router';
+import { View, YStack, Text } from 'tamagui';
 
 export function OverviewContainer() {
   return (

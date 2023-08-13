@@ -1,13 +1,16 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
+
+import { MyStack } from '../../lib/components';
+
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
 
 export default function DecksLayout() {
   return (
-    <Stack>
+    <MyStack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="create"
-        options={{ presentation: "modal", headerShown: false }}
-      />
-    </Stack>
+      <Stack.Screen name="create" options={{ presentation: 'modal' }} />
+    </MyStack>
   );
 }

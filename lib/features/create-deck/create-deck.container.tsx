@@ -1,30 +1,41 @@
-import { ComponentProps } from "react";
-import * as Haptics from "expo-haptics";
-import { useRouter } from "expo-router";
-import Animated, { Layout } from "react-native-reanimated";
-import { Button, Text } from "tamagui";
-import { CreateDeckForm } from "./create-deck.component";
+import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
+import { ComponentProps } from 'react';
+import Animated, { Layout } from 'react-native-reanimated';
+import { Button } from 'tamagui';
+
+import { CreateDeckForm, CreateDeckFormT } from './create-deck.component';
 
 export function CreateDeckButtonContainer() {
   const router = useRouter();
 
   function handleCreateDeckPress() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    router.push("/decks/create");
+    router.push('/decks/create');
   }
 
   return (
     <Animated.View layout={Layout}>
-      <CreateDeckButton onPress={handleCreateDeckPress} />
+      <CreateDeckButton label="Create Deck" onPress={handleCreateDeckPress} />
     </Animated.View>
   );
 }
 
 export function CreateDeckFormContainer() {
-  return <CreateDeckForm />;
+  const router = useRouter();
+
+  function handleCardFormSubmit(values: CreateDeckFormT) {
+    // Needed for closing modal and correct navigation
+    router.back();
+    router.replace({ pathname: '/deck/[id]', params: { id: values.name } });
+  }
+
+  return <CreateDeckForm onSubmit={handleCardFormSubmit} />;
 }
 
-function CreateDeckButton(props: ComponentProps<typeof Button>) {
+function CreateDeckButton(
+  props: Omit<ComponentProps<typeof Button>, 'children'> & { label: string },
+) {
   return (
     <Button
       backgroundColor="$blue10"
@@ -34,9 +45,13 @@ function CreateDeckButton(props: ComponentProps<typeof Button>) {
       fontFamily="$rounded"
       fontWeight="600"
       fontSize={17}
+      shadowColor="$shadowColor"
+      shadowOffset={{ width: 0, height: 8 }}
+      shadowOpacity={0.1}
+      shadowRadius={18}
       {...props}
     >
-      Create Deck
+      {props.label}
     </Button>
   );
 }

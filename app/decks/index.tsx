@@ -1,7 +1,7 @@
-import { ScrollView, YStack } from "tamagui";
+import { ScrollView, YStack } from 'tamagui';
 
-import { DeckListContainer } from "../../lib/features";
-import { CreateDeckButtonContainer } from "../../lib/features/create-deck";
+import { DeckListContainer } from '../../lib/features';
+import { CreateDeckButtonContainer } from '../../lib/features/create-deck';
 
 export default function DeckListScreen() {
   return (

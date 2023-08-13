@@ -27,3 +27,5 @@ export type CardModel = {
   /** Card answer on back */
   answer: string;
 };
+
+export type DeckTypes = 'simple';

@@ -1,1 +1,1 @@
-export * from "./deck-list.container";
+export * from './deck-list.container';

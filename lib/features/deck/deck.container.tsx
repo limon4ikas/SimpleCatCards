@@ -1,4 +1,4 @@
-import { View, Text } from "tamagui";
+import { View, Text } from 'tamagui';
 
 export type DeckContainerProps = {
   id: string;

@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Dimensions, TouchableOpacity } from "react-native";
-import { Input, Text, View, XStack, YStack, getTokens } from "tamagui";
-import { differenceInDays } from "date-fns";
-import { Link } from "expo-router";
-import { Feather } from "@expo/vector-icons";
+import { Feather } from '@expo/vector-icons';
+import { formatDistanceToNow } from 'date-fns';
+import { Link } from 'expo-router';
+import { useState } from 'react';
+import { Dimensions, TouchableOpacity } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   FadeIn,
   FadeOut,
@@ -12,11 +12,11 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
+import { Input, Text, View, XStack, YStack, getTokens } from 'tamagui';
 
-import { DeckModel } from "../../types";
-import { useDeckList } from "./deck-list.hooks";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useDeckList } from './deck-list.hooks';
+import { DeckModel } from '../../types';
 
 export type DeckListProps = {
   label: string;
@@ -39,6 +39,11 @@ export function DeckList(props: DeckListProps) {
         fontFamily="$rounded"
         fontSize={16}
         fontWeight="400"
+        backgroundColor="$gray3"
+        borderRadius="$8"
+        px="$4"
+        placeholderTextColor="$gray11"
+        borderWidth={0}
       />
       <XStack justifyContent="flex-start">
         <Text fontSize="$9" fontWeight="600" fontFamily="$rounded">
@@ -65,7 +70,7 @@ export function DeckList(props: DeckListProps) {
   );
 }
 
-const WIDTH = Dimensions.get("screen").width;
+const WIDTH = Dimensions.get('screen').width;
 const THRESHOLD = -WIDTH / 4;
 const SPACE_FOR_BUTTON = THRESHOLD / 2;
 
@@ -126,18 +131,18 @@ function DeckListItem(props: DeckListItemProps) {
     >
       <GestureDetector gesture={panGesture}>
         <Animated.View
-          style={[{ position: "relative", zIndex: 1 }, xTransform]}
+          style={[{ position: 'relative', zIndex: 1 }, xTransform]}
         >
           <View
             bg="white"
-            shadowColor="black"
-            shadowOffset={{ width: 0, height: 20 }}
-            shadowOpacity={0.15}
-            shadowRadius={10}
+            shadowColor="$shadowColor"
+            shadowOffset={{ width: 0, height: 8 }}
+            shadowOpacity={0.1}
+            shadowRadius={18}
             borderRadius="$5"
           >
             <Link
-              href={{ pathname: "/deck/[id]", params: { id: name } }}
+              href={{ pathname: '/deck/[id]', params: { id: name } }}
               asChild
               disabled={isDisabled}
             >
@@ -166,13 +171,13 @@ function DeckListItem(props: DeckListItemProps) {
                       <XStack alignItems="center" gap="$2">
                         <Feather name="edit" size={14} />
                         <Text fontFamily="$rounded" fontSize={14}>
-                          {differenceInDays(new Date(), lastEdited)}d ago
+                          {formatDistanceToNow(lastEdited)} ago
                         </Text>
                       </XStack>
                     </XStack>
                     {lastAttempted ? (
                       <Text fontFamily="$rounded" fontSize={14}>
-                        {differenceInDays(new Date(), lastAttempted)}d ago
+                        {formatDistanceToNow(lastAttempted)}
                       </Text>
                     ) : null}
                   </XStack>
@@ -187,7 +192,7 @@ function DeckListItem(props: DeckListItemProps) {
           <Feather
             name="trash"
             size={24}
-            color={getTokens().color.red10Light.val}
+            color={getTokens().color.$red10Light.val}
           />
         </TouchableOpacity>
       </View>
