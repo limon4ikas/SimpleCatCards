@@ -5,6 +5,7 @@ import { useColorScheme } from "react-native";
 import { TamaguiProvider, Theme } from "tamagui";
 
 import config from "../tamagui.config";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -39,14 +40,16 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <TamaguiProvider config={config}>
-      <Theme name={colorScheme === "dark" ? "dark" : "light"}>
-        <Stack initialRouteName="/overview/index">
-          <Stack.Screen name="index" options={{ title: "Overview" }} />
-          <Stack.Screen name="decks" options={{ title: "Decks" }} />
-          <Stack.Screen name="deck/[id]" options={{ title: "Decks" }} />
-        </Stack>
-      </Theme>
-    </TamaguiProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <TamaguiProvider config={config}>
+        <Theme name={colorScheme === "dark" ? "dark" : "light"}>
+          <Stack initialRouteName="/overview/index">
+            <Stack.Screen name="index" options={{ title: "Overview" }} />
+            <Stack.Screen name="decks" options={{ title: "Decks" }} />
+            <Stack.Screen name="deck/[id]" options={{ title: "Decks" }} />
+          </Stack>
+        </Theme>
+      </TamaguiProvider>
+    </GestureHandlerRootView>
   );
 }
