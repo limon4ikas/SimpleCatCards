@@ -62,6 +62,11 @@ function RootLayoutNav() {
               <Stack.Screen name="index" options={{ title: 'Overview' }} />
               <Stack.Screen name="decks" options={{ title: 'Decks' }} />
               <Stack.Screen name="deck/[id]" options={{ title: 'Decks' }} />
+              <Stack.Screen name="auth/login" options={{ title: 'Login' }} />
+              <Stack.Screen
+                name="auth/register"
+                options={{ title: 'Register' }}
+              />
             </MyStack>
           </Theme>
         </TamaguiProvider>

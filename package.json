@@ -37,7 +37,6 @@
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
     "expo-web-browser": "~12.3.2",
-    "ky": "^0.33.3",
     "pocketbase": "^0.16.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

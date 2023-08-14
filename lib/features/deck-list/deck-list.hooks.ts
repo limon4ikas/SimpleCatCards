@@ -1,9 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
+import { ClientResponseError } from 'pocketbase';
 import { useMemo, useState } from 'react';
 
-import { DeckModel } from '../../types';
+import { getDecks } from '../../api/pb';
+import { queries } from '../../api/queries';
+import { DecksResponse } from '../../types';
 
 type UseDeckListConfig = {
-  decks: DeckModel[];
+  decks: DecksResponse[];
 };
 
 export const useDeckList = (config: UseDeckListConfig) => {
@@ -19,3 +23,10 @@ export const useDeckList = (config: UseDeckListConfig) => {
 
   return { filterName, setFilterName, filteredDecks };
 };
+
+export function useQueryDecks(userId: string) {
+  return useQuery<DecksResponse[], ClientResponseError>({
+    ...queries.decks.all,
+    queryFn: () => getDecks(userId),
+  });
+}

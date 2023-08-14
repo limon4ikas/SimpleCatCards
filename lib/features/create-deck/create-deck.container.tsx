@@ -1,7 +1,6 @@
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { ComponentProps } from 'react';
-import Animated, { Layout } from 'react-native-reanimated';
 import { Button } from 'tamagui';
 
 import { CreateDeckForm, CreateDeckFormT } from './create-deck.component';
@@ -15,9 +14,7 @@ export function CreateDeckButtonContainer() {
   }
 
   return (
-    <Animated.View layout={Layout}>
-      <CreateDeckButton label="Create Deck" onPress={handleCreateDeckPress} />
-    </Animated.View>
+    <CreateDeckButton label="Create Deck" onPress={handleCreateDeckPress} />
   );
 }
 

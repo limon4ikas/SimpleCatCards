@@ -16,11 +16,11 @@ import Animated, {
 import { Input, Text, View, XStack, YStack, getTokens } from 'tamagui';
 
 import { useDeckList } from './deck-list.hooks';
-import { DeckModel } from '../../types';
+import { DecksResponse } from '../../types';
 
 export type DeckListProps = {
   label: string;
-  decks: DeckModel[];
+  decks: DecksResponse[];
   onDeckDelete?: (deckId: string) => void;
 };
 
@@ -59,8 +59,10 @@ export function DeckList(props: DeckListProps) {
             id={deck.id}
             name={deck.name}
             cardsCount={deck.cards.length}
-            lastEdited={deck.lastEdited}
-            lastAttempted={deck.lastAttempted}
+            lastEdited={new Date(deck.lastEdited)}
+            lastAttempted={
+              deck.lastAttempted ? new Date(deck.lastAttempted) : undefined
+            }
             onDelete={onDeckDelete}
             color={deck.color}
           />
