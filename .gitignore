@@ -39,4 +39,7 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
-.env*.local
+
+# Pocketbase DB
+pocketbase/pb_data
+
