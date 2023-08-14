@@ -1,13 +1,8 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 import { ClientResponseError, RecordAuthResponse } from 'pocketbase';
-import { useEffect, useState } from 'react';
 
-import {
-  loginWithEmailPassword,
-  pb,
-  queries,
-  registerWithEmailPassword,
-} from '../../api';
+import { loginWithEmailPassword, registerWithEmailPassword } from '../../api';
 import { UsersResponse } from '../../types';
 import {
   LoginWithEmailPassword,
@@ -15,6 +10,8 @@ import {
 } from '../../types/api';
 
 export function useLoginWithEmailPasswordMutation() {
+  const router = useRouter();
+
   return useMutation<
     RecordAuthResponse<UsersResponse>,
     ClientResponseError,
@@ -22,6 +19,7 @@ export function useLoginWithEmailPasswordMutation() {
   >({
     mutationFn: ({ email, password }) =>
       loginWithEmailPassword(email, password),
+    onSuccess: () => router.push('/(home)/decks/overview'),
   });
 }
 
@@ -36,21 +34,4 @@ export function useRegisterWithEmailPasswordMutation() {
   });
 }
 
-export function useUserAuth() {
-  const [user, setUser] = useState<UsersResponse | null>(null);
-
-  useEffect(() => {
-    const cleanup = pb.authStore.onChange((token, model) => {
-      console.log(model);
-      setUser(model as unknown as UsersResponse);
-    });
-
-    return () => cleanup();
-  }, []);
-
-  return user;
-}
-
-export function useUserQuery() {
-  return useQuery<UsersResponse, ClientResponseError>(queries.user._def);
-}
+export * from './user.context';

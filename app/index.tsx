@@ -1,12 +1,9 @@
-import { Link } from 'expo-router';
-import { YStack } from 'tamagui';
+import { Redirect, useRootNavigationState } from 'expo-router';
 
-export default function OverviewScreen() {
-  return (
-    <YStack flex={1} alignItems="center" justifyContent="center">
-      <Link href="/decks">Go to decks</Link>
-      <Link href="/auth/login">Go to login</Link>
-      <Link href="/auth/register">Go to register</Link>
-    </YStack>
-  );
+export default function IndexScreen() {
+  const rootNavigationState = useRootNavigationState();
+
+  if (!rootNavigationState?.key) return null;
+
+  return <Redirect href="/decks/" />;
 }

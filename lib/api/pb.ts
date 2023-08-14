@@ -11,6 +11,10 @@ export function getDecks(userId: string) {
   });
 }
 
+export function deleteDeck(deckId: string) {
+  return pb.collection(Collections.Decks).delete(deckId);
+}
+
 export function loginWithEmailPassword(email: string, password: string) {
   return pb
     .collection(Collections.Users)

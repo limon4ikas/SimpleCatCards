@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
@@ -6,10 +6,9 @@ import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { TamaguiProvider, Theme } from 'tamagui';
 
+import { queryClient } from '../lib/api';
 import { MyStack } from '../lib/components';
 import config from '../tamagui.config';
-
-const queryClient = new QueryClient();
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -36,6 +35,8 @@ export default function RootLayout() {
     SFProRoundedUltralight: require('../assets/fonts/SF-Pro-Rounded-Ultralight.ttf'),
   });
 
+  const colorScheme = useColorScheme();
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -47,30 +48,29 @@ export default function RootLayout() {
 
   if (!loaded) return null;
 
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
         <TamaguiProvider config={config}>
           <Theme name={colorScheme === 'dark' ? 'dark' : 'light'}>
-            <MyStack>
-              <Stack.Screen name="index" options={{ title: 'Overview' }} />
-              <Stack.Screen name="decks" options={{ title: 'Decks' }} />
-              <Stack.Screen name="deck/[id]" options={{ title: 'Decks' }} />
-              <Stack.Screen name="auth/login" options={{ title: 'Login' }} />
-              <Stack.Screen
-                name="auth/register"
-                options={{ title: 'Register' }}
-              />
-            </MyStack>
+            <RootLayoutNav />
           </Theme>
         </TamaguiProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>
+  );
+}
+
+function RootLayoutNav() {
+  return (
+    <MyStack>
+      <Stack.Screen name="index" options={{ title: 'Redirect' }} />
+      <Stack.Screen name="(home)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="auth/login"
+        options={{ title: 'Login', headerBackVisible: false }}
+      />
+      <Stack.Screen name="auth/register" options={{ title: 'Register' }} />
+    </MyStack>
   );
 }

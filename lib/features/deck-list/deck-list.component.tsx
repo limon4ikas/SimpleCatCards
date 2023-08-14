@@ -144,7 +144,10 @@ function DeckListItem(props: DeckListItemProps) {
             borderRadius="$5"
           >
             <Link
-              href={{ pathname: '/deck/[id]', params: { id: name } }}
+              href={{
+                pathname: '/(home)/decks/deck/[id]',
+                params: { id: name },
+              }}
               asChild
               disabled={isDisabled}
             >

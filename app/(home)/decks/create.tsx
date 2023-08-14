@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Platform, TouchableOpacity } from 'react-native';
 import { Text, YStack } from 'tamagui';
 
-import { CreateDeckFormContainer } from '../../lib/features/create-deck';
+import { CreateDeckFormContainer } from '../../../lib/features/create-deck';
 
 export default function CreateDeckScreen() {
   const router = useRouter();

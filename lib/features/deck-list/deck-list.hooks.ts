@@ -1,10 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { ClientResponseError } from 'pocketbase';
 import { useMemo, useState } from 'react';
 
-import { getDecks } from '../../api/pb';
-import { queries } from '../../api/queries';
+import { deleteDeck, getDecks } from '../../api';
+import { queries, queryClient } from '../../api/queries';
 import { DecksResponse } from '../../types';
+import { useUser } from '../auth';
 
 type UseDeckListConfig = {
   decks: DecksResponse[];
@@ -24,9 +25,25 @@ export const useDeckList = (config: UseDeckListConfig) => {
   return { filterName, setFilterName, filteredDecks };
 };
 
-export function useQueryDecks(userId: string) {
+export function useUserDecks() {
+  const user = useUser();
+
   return useQuery<DecksResponse[], ClientResponseError>({
-    ...queries.decks.all,
-    queryFn: () => getDecks(userId),
+    queryKey: queries.decks.all(user.id).queryKey,
+    queryFn: () => getDecks(user.id),
+  });
+}
+
+export function useUserDeckDelete() {
+  const user = useUser();
+
+  return useMutation<boolean, ClientResponseError, string>({
+    mutationFn: (deckId) => deleteDeck(deckId),
+    mutationKey: ['deleteDeck'],
+    onSuccess: (isSuccessDelete) => {
+      queryClient.invalidateQueries({
+        queryKey: queries.decks.all(user.id).queryKey,
+      });
+    },
   });
 }
