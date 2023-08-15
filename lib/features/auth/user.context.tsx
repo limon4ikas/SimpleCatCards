@@ -22,7 +22,7 @@ export function useAuth() {
   useEffect(() => {
     const cleanup = pb.authStore.onChange((token, model) => {
       setUser(model as unknown as UsersResponse);
-    });
+    }, true);
 
     return () => cleanup();
   }, []);

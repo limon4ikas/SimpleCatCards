@@ -3,15 +3,15 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "TAMAGUI_TARGET=native expo start -c",
-    "android": "TAMAGUI_TARGET=native expo start --android",
-    "ios": "TAMAGUI_TARGET=native expo start --ios",
-    "web": "TAMAGUI_TARGET=web expo start --web -c",
-    "build-simulator": "eas build -p ios --profile development",
-    "dev-client": "TAMAGUI_TARGET=native expo start --dev-client",
+    "start": "TAMAGUI_TARGET=native expo start --dev-client",
+    "android": "TAMAGUI_TARGET=native expo start --dev-client --android",
+    "ios": "TAMAGUI_TARGET=native expo start --dev-client --ios",
+    "build-ios": "eas build -p ios --profile simulator --local",
+    "build-android": "eas build -p android --profile simulator --local",
+    "typegen": "pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./lib/types/pocketbase-types.ts",
     "test": "jest --watchAll",
     "lint": "eslint .",
-    "typegen": "pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./lib/types/pocketbase-types.ts"
+    "format": "prettier --write ."
   },
   "jest": {
     "preset": "jest-expo"

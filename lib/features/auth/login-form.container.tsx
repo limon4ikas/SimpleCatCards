@@ -5,7 +5,7 @@ import { Button, YStack, Text } from 'tamagui';
 
 import {
   useLoginWithEmailPasswordMutation,
-  useOauthRedirect,
+  useOAuth,
   useQueryAuthMethods,
 } from './hooks';
 import { LoginForm } from './login-form.component';
@@ -15,7 +15,7 @@ import { LoginWithEmailPassword } from '../../types/api';
 export function LoginFormContainer() {
   const loginWithPassword = useLoginWithEmailPasswordMutation();
   const { data, status, error } = useQueryAuthMethods();
-  useOauthRedirect();
+  useOAuth();
 
   async function handleProviderAuthClick(provider: AuthProviderInfo) {
     await AsyncStorage.setItem('provider', JSON.stringify(provider));

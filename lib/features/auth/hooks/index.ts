@@ -56,7 +56,7 @@ export function useRegisterWithEmailPasswordMutation() {
   });
 }
 
-export function useOauthRedirect() {
+export function useOAuth() {
   const strUrl = useURL();
   const router = useRouter();
 
@@ -68,7 +68,9 @@ export function useOauthRedirect() {
 
       if (!url.searchParams.has('code')) return;
 
-      const providerStr = await AsyncStorage.getItem('provider');
+      const providerStr = await AsyncStorage.getItem('provider').catch(
+        console.log,
+      );
 
       if (!providerStr) return;
 
@@ -85,7 +87,8 @@ export function useOauthRedirect() {
           url.searchParams.get('code')!,
           provider.codeVerifier,
           config.EXPO_PUBLIC_REDIRECT_URL,
-        );
+        )
+        .catch(console.log);
 
       router.push('/(home)/decks/');
     })();

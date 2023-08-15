@@ -24,7 +24,10 @@ export function CreateDeckFormContainer() {
   function handleCardFormSubmit(values: CreateDeckFormT) {
     // Needed for closing modal and correct navigation
     router.back();
-    router.replace({ pathname: '/deck/[id]', params: { id: values.name } });
+    router.replace({
+      pathname: '/(home)/decks/deck/[id]',
+      params: { id: values.name },
+    });
   }
 
   return <CreateDeckForm onSubmit={handleCardFormSubmit} />;

@@ -1,5 +1,4 @@
 import PocketBase from 'pocketbase';
-import { Linking } from 'react-native';
 
 import { config } from '../config';
 import { Collections, DecksResponse, UsersResponse } from '../types';
