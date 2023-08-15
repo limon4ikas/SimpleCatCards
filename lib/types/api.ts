@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const LoginWithEmailPasswordSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().email(),
+  password: z.string().min(8),
 });
 
 export type LoginWithEmailPassword = z.infer<

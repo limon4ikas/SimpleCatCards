@@ -5,7 +5,7 @@ import { useRegisterWithEmailPasswordMutation } from '../../lib/features/auth';
 const email = 'limonikas@me.com';
 const password = 'xuwi389fa';
 
-export default function Login() {
+export default function RegisterScreen() {
   const mutation = useRegisterWithEmailPasswordMutation();
 
   return (

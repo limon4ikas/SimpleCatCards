@@ -4,11 +4,16 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import eventsource from 'react-native-sse';
 import { TamaguiProvider, Theme } from 'tamagui';
 
 import { queryClient } from '../lib/api';
 import { MyStack } from '../lib/components';
 import config from '../tamagui.config';
+import 'react-native-url-polyfill/auto';
+
+// @ts-ignore
+global.EventSource = eventsource;
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -67,10 +72,9 @@ function RootLayoutNav() {
       <Stack.Screen name="index" options={{ title: 'Redirect' }} />
       <Stack.Screen name="(home)" options={{ headerShown: false }} />
       <Stack.Screen
-        name="auth/login"
-        options={{ title: 'Login', headerBackVisible: false }}
+        name="auth"
+        options={{ headerShown: false, presentation: 'fullScreenModal' }}
       />
-      <Stack.Screen name="auth/register" options={{ title: 'Register' }} />
     </MyStack>
   );
 }

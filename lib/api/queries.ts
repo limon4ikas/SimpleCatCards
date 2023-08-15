@@ -7,6 +7,7 @@ import { QueryClient } from '@tanstack/react-query';
 export const queryClient = new QueryClient();
 
 export const queries = createQueryKeyStore({
+  authMethods: null,
   decks: { all: (userId: string) => [userId] },
 });
 

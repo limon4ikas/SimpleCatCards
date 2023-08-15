@@ -1,4 +1,5 @@
 import PocketBase from 'pocketbase';
+import { Linking } from 'react-native';
 
 import { config } from '../config';
 import { Collections, DecksResponse, UsersResponse } from '../types';
@@ -19,6 +20,14 @@ export function loginWithEmailPassword(email: string, password: string) {
   return pb
     .collection(Collections.Users)
     .authWithPassword<UsersResponse>(email, password);
+}
+
+export function loginWithGithub() {
+  // return pb.collection('users').
+}
+
+export function getAuthProviders() {
+  return pb.collection(Collections.Users).listAuthMethods();
 }
 
 export async function registerWithEmailPassword(

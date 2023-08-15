@@ -1,3 +1,4 @@
+import { Href, Redirect } from 'expo-router';
 import {
   useState,
   useEffect,
@@ -8,14 +9,15 @@ import {
 
 import { pb } from '../../api';
 import { UsersResponse } from '../../types';
-import { Redirect } from 'expo-router';
 
 export interface AuthContextType {
   user: UsersResponse | null;
 }
 
 export function useAuth() {
-  const [user, setUser] = useState<UsersResponse | null>(null);
+  const [user, setUser] = useState<UsersResponse | null>(
+    () => pb.authStore.model as unknown as UsersResponse,
+  );
 
   useEffect(() => {
     const cleanup = pb.authStore.onChange((token, model) => {
@@ -30,10 +32,12 @@ export function useAuth() {
 
 const AuthContext = createContext<null | AuthContextType>(null);
 
-export function AuthContextProvider(props: PropsWithChildren) {
+export function AuthContextProvider<T>(
+  props: PropsWithChildren<{ redirectHref: Href<T> }>,
+) {
   const { user } = useAuth();
 
-  if (!user) return <Redirect href="/auth/login" />;
+  if (!user) return <Redirect href={props.redirectHref} />;
 
   return (
     <AuthContext.Provider value={{ user }}>
