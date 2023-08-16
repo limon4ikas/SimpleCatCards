@@ -146,13 +146,13 @@ function DeckListItem(props: DeckListItemProps) {
             <Link
               href={{
                 pathname: '/(home)/decks/deck/[id]',
-                params: { id: name },
+                params: { id, name },
               }}
               asChild
               disabled={isDisabled}
             >
               <TouchableOpacity>
-                <YStack space="$2" px="$4" py="$2">
+                <YStack space="$2.5" px="$4" py="$3">
                   <XStack>
                     <Text
                       fontFamily="$rounded"
@@ -180,11 +180,9 @@ function DeckListItem(props: DeckListItemProps) {
                         </Text>
                       </XStack>
                     </XStack>
-                    {lastAttempted ? (
-                      <Text fontFamily="$rounded" fontSize={14}>
-                        {formatDistanceToNow(lastAttempted)} ago
-                      </Text>
-                    ) : null}
+                    <Text fontFamily="$rounded" fontSize={14}>
+                      {formatDistanceToNow(lastAttempted ?? new Date())} ago
+                    </Text>
                   </XStack>
                 </YStack>
               </TouchableOpacity>

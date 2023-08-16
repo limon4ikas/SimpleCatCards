@@ -1,1 +1,4 @@
-export type DeckScreenParams = { id: string };
+export type DeckScreenParams = {
+  id: string;
+  name: string;
+};

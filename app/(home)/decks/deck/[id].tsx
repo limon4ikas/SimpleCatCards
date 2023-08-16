@@ -8,8 +8,8 @@ export default function DeckScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: params.id }} />
-      <DeckContainer id={params.id} />
+      <Stack.Screen options={{ title: params.name }} />
+      <DeckContainer id={params.id} name={params.name} />
     </>
   );
 }

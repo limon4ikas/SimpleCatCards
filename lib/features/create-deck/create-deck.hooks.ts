@@ -10,7 +10,12 @@ export function useCreateDeckMutation() {
   const user = useUser();
 
   return useMutation<DecksResponse, ClientResponseError, CreateDeckFormT>({
-    mutationFn: (variables) => createDeck(variables),
+    mutationFn: (variables) =>
+      createDeck({
+        ...variables,
+        user: user.id,
+        lastEdited: new Date().toISOString(),
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries(queries.decks.all(user.id));
     },

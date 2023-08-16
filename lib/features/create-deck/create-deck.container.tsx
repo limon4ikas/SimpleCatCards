@@ -24,12 +24,12 @@ export function CreateDeckFormContainer() {
   const createDeck = useCreateDeckMutation();
 
   async function handleCardFormSubmit(values: CreateDeckFormT) {
-    await createDeck.mutateAsync(values);
+    const createdDeck = await createDeck.mutateAsync(values);
     // Needed for closing modal and correct navigation
     router.back();
     router.replace({
       pathname: '/(home)/decks/deck/[id]',
-      params: { id: values.name },
+      params: { id: createdDeck.id, name: createdDeck.name },
     });
   }
 
