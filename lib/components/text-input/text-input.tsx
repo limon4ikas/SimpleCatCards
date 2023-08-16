@@ -7,6 +7,9 @@ const StyledInput = styled(Input, {
   borderRadius: '$5',
   backgroundColor: '$gray3',
   placeholderTextColor: '$gray10',
+  fontWeight: '600',
+  fontSize: 16,
+  borderWidth: 0,
 });
 
 export type TextInputProps = ComponentProps<typeof StyledInput> & {

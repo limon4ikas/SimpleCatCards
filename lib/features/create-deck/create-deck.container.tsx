@@ -1,9 +1,10 @@
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { ComponentProps } from 'react';
-import { Button } from 'tamagui';
+import { Button, Text } from 'tamagui';
 
 import { CreateDeckForm, CreateDeckFormT } from './create-deck.component';
+import { useCreateDeckMutation } from './create-deck.hooks';
 
 export function CreateDeckButtonContainer() {
   const router = useRouter();
@@ -20,8 +21,10 @@ export function CreateDeckButtonContainer() {
 
 export function CreateDeckFormContainer() {
   const router = useRouter();
+  const createDeck = useCreateDeckMutation();
 
-  function handleCardFormSubmit(values: CreateDeckFormT) {
+  async function handleCardFormSubmit(values: CreateDeckFormT) {
+    await createDeck.mutateAsync(values);
     // Needed for closing modal and correct navigation
     router.back();
     router.replace({
@@ -29,6 +32,8 @@ export function CreateDeckFormContainer() {
       params: { id: values.name },
     });
   }
+
+  if (createDeck.error) return <Text>{createDeck.error.message}</Text>;
 
   return <CreateDeckForm onSubmit={handleCardFormSubmit} />;
 }

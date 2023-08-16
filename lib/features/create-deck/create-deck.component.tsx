@@ -1,14 +1,25 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ElementRef, useEffect, useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { InteractionManager } from 'react-native';
-import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
-import { Button, Input } from 'tamagui';
+import { useForm } from 'react-hook-form';
+import Animated, { Layout } from 'react-native-reanimated';
+import { Button } from 'tamagui';
 import z from 'zod';
+
+import config from '../../../tamagui.config';
+import { TextField } from '../../components';
+
+const tokenColors = config.tokens.color;
+
+const colors = [
+  tokenColors.blue10Light,
+  tokenColors.red10Light,
+  tokenColors.yellow10Light,
+  tokenColors.orange10Light,
+];
 
 const CreateDeckFormSchema = z.object({
   name: z.string().min(4),
   description: z.string().optional(),
+  color: z.string(),
 });
 
 export type CreateDeckFormT = z.infer<typeof CreateDeckFormSchema>;
@@ -18,93 +29,29 @@ export type CreateDeckFormProps = {
 };
 
 export function CreateDeckForm({ onSubmit }: CreateDeckFormProps) {
-  const { control, handleSubmit } = useForm<CreateDeckFormT>({
-    defaultValues: {
-      name: '',
-      description: '',
-    },
+  const { control, handleSubmit, setValue } = useForm<CreateDeckFormT>({
+    defaultValues: { name: '', description: '', color: '' },
     resolver: zodResolver(CreateDeckFormSchema),
   });
 
-  const ref = useRef<ElementRef<typeof Input>>(null);
-
-  useEffect(() => {
-    InteractionManager.runAfterInteractions(() => ref.current?.focus());
-  }, []);
-
   return (
     <Animated.View layout={Layout} style={{ flex: 1, gap: 16 }}>
-      <Controller<CreateDeckFormT>
-        name="name"
+      <TextField control={control} name="name" placeholder="Name" />
+      <TextField
         control={control}
-        render={({ field, fieldState: { error } }) => (
-          <Animated.View layout={Layout}>
-            <Input
-              value={field.value}
-              onChangeText={field.onChange}
-              onBlur={field.onBlur}
-              fontFamily="$rounded"
-              fontWeight="600"
-              fontSize={16}
-              borderWidth={0}
-              backgroundColor="$gray3"
-              placeholderTextColor="$gray10"
-              placeholder="Name"
-              ref={ref}
-            />
-            {error && (
-              <Animated.Text
-                style={{
-                  fontFamily: 'SFProRoundedMedium',
-                  fontWeight: '500',
-                  fontSize: 14,
-                  paddingTop: 4,
-                  color: 'red',
-                }}
-                entering={FadeIn}
-                exiting={FadeOut}
-                layout={Layout}
-              >
-                {error?.message}
-              </Animated.Text>
-            )}
-          </Animated.View>
-        )}
-      />
-      <Controller<CreateDeckFormT>
         name="description"
-        control={control}
-        render={({ field, fieldState: { error } }) => (
-          <Animated.View layout={Layout}>
-            <Input
-              value={field.value}
-              onChangeText={field.onChange}
-              onBlur={field.onBlur}
-              fontFamily="$rounded"
-              fontWeight="600"
-              fontSize={16}
-              borderWidth={0}
-              backgroundColor="$gray3"
-              placeholderTextColor="$gray10"
-              placeholder="Description"
-            />
-            {error && (
-              <Animated.Text
-                style={{
-                  fontFamily: 'SFProRoundedMedium',
-                  fontWeight: '500',
-                  fontSize: 24,
-                }}
-                entering={FadeIn}
-                exiting={FadeOut}
-                layout={Layout}
-              >
-                {error?.message}
-              </Animated.Text>
-            )}
-          </Animated.View>
-        )}
+        placeholder="Description"
       />
+      {colors.map(({ name, val }) => (
+        <Button
+          key={name}
+          bg={val}
+          color="white"
+          onPress={() => setValue('color', val)}
+        >
+          {name}
+        </Button>
+      ))}
       <Animated.View layout={Layout} style={{ paddingTop: 14 }}>
         <Button
           fontFamily="$rounded"

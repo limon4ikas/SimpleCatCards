@@ -3,8 +3,8 @@
  */
 
 export enum Collections {
-  Cards = 'cards',
   Decks = 'decks',
+  Flashcards = 'flashcards',
   Users = 'users',
 }
 
@@ -32,20 +32,24 @@ export type AuthSystemFields<T = never> = {
 
 // Record types for each collection
 
-export type CardsRecord = {
-  question: string;
-  answer: string;
-  deck?: RecordIdString;
-};
-
 export type DecksRecord = {
   name: string;
   description?: string;
-  lastEdited: IsoDateString;
+  lastEdited?: IsoDateString;
   lastAttempted?: IsoDateString;
   color: string;
   cards?: RecordIdString[];
   user?: RecordIdString;
+};
+
+export type FlashcardsRecord = {
+  front: string;
+  back: string;
+  deck?: RecordIdString;
+  interval?: number;
+  repetition?: number;
+  efactor?: number;
+  dueDate: IsoDateString;
 };
 
 export type UsersRecord = {
@@ -55,9 +59,9 @@ export type UsersRecord = {
 };
 
 // Response types include system fields and match responses from the PocketBase API
-export type CardsResponse<Texpand = unknown> = Required<CardsRecord> &
-  BaseSystemFields<Texpand>;
 export type DecksResponse<Texpand = unknown> = Required<DecksRecord> &
+  BaseSystemFields<Texpand>;
+export type FlashcardsResponse<Texpand = unknown> = Required<FlashcardsRecord> &
   BaseSystemFields<Texpand>;
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> &
   AuthSystemFields<Texpand>;
@@ -65,13 +69,13 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> &
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
-  cards: CardsRecord;
   decks: DecksRecord;
+  flashcards: FlashcardsRecord;
   users: UsersRecord;
 };
 
 export type CollectionResponses = {
-  cards: CardsResponse;
   decks: DecksResponse;
+  flashcards: FlashcardsResponse;
   users: UsersResponse;
 };

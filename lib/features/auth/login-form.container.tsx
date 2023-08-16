@@ -27,7 +27,13 @@ export function LoginFormContainer() {
     loginWithPassword.mutate(credentials);
   }
 
-  if (status === 'loading') return <ActivityIndicator />;
+  if (status === 'loading') {
+    return (
+      <YStack flex={1} justifyContent="center">
+        <ActivityIndicator />
+      </YStack>
+    );
+  }
 
   if (status === 'error') return <Text>{error.message}</Text>;
 

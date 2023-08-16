@@ -1,7 +1,12 @@
 import PocketBase from 'pocketbase';
 
 import { config } from '../config';
-import { Collections, DecksResponse, UsersResponse } from '../types';
+import {
+  Collections,
+  DecksRecord,
+  DecksResponse,
+  UsersResponse,
+} from '../types';
 
 export const pb = new PocketBase(config.EXPO_PUBLIC_API_URL);
 
@@ -21,8 +26,10 @@ export function loginWithEmailPassword(email: string, password: string) {
     .authWithPassword<UsersResponse>(email, password);
 }
 
-export function loginWithGithub() {
-  // return pb.collection('users').
+export function createDeck(
+  deck: Pick<DecksRecord, 'color' | 'name' | 'description'>,
+) {
+  return pb.collection(Collections.Decks).create<DecksResponse>(deck);
 }
 
 export function getAuthProviders() {
