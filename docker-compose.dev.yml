@@ -2,6 +2,7 @@ version: '3.8'
 services:
   cards_pb:
     image: ghcr.io/muchobien/pocketbase:latest
+    container_name: pb_simplecatcards
     restart: unless-stopped
     ports:
       - 8090:8090

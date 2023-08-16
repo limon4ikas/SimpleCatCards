@@ -9,6 +9,7 @@
     "build-ios": "eas build -p ios --profile simulator --local",
     "build-android": "eas build -p android --profile simulator --local",
     "typegen": "pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./lib/types/pocketbase-types.ts",
+    "db:generate-snapshot": "docker exec -it pb_simplecatcards /usr/local/bin/pocketbase migrate collections --migrationsDir /pb_migrations --dir /pb_data",
     "test": "jest --watchAll",
     "lint": "eslint .",
     "format": "prettier --write ."
