@@ -14,10 +14,8 @@ export const pb = new PocketBase(
   new AsyncAuthStore(),
 );
 
-export function getDecks(userId: string) {
-  return pb.collection(Collections.Decks).getFullList<DecksResponse>({
-    filter: `user = "${userId}"`,
-  });
+export function getDecks() {
+  return pb.collection(Collections.Decks).getFullList<DecksResponse>();
 }
 
 export function deleteDeck(deckId: string) {
@@ -53,4 +51,11 @@ export async function registerWithEmailPassword(
     password,
     passwordConfirm,
   });
+}
+
+export function getRecentlyReviewed() {
+  return pb
+    .collection(Collections.Decks)
+    .getList<DecksResponse>(1, 4, { sort: '-lastAttempted' })
+    .then((d) => d.items);
 }

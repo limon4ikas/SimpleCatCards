@@ -8,7 +8,10 @@ export const queryClient = new QueryClient();
 
 export const queries = createQueryKeyStore({
   authMethods: null,
-  decks: { all: (userId: string) => [userId] },
+  decks: {
+    all: null,
+    recentlyReviewed: null,
+  },
 });
 
 export type QueryKeys = inferQueryKeyStore<typeof queries>;

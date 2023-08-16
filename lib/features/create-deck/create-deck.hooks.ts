@@ -17,7 +17,7 @@ export function useCreateDeckMutation() {
         lastEdited: new Date().toISOString(),
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries(queries.decks.all(user.id));
+      queryClient.invalidateQueries(queries.decks.all.queryKey);
     },
   });
 }

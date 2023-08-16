@@ -5,7 +5,6 @@ import { useMemo, useState } from 'react';
 import { deleteDeck, getDecks } from '../../api';
 import { queries, queryClient } from '../../api/queries';
 import { DecksResponse } from '../../types';
-import { useUser } from '../auth';
 
 type UseDeckListConfig = {
   decks: DecksResponse[];
@@ -26,23 +25,19 @@ export const useDeckList = (config: UseDeckListConfig) => {
 };
 
 export function useUserDecks() {
-  const user = useUser();
-
   return useQuery<DecksResponse[], ClientResponseError>({
-    queryKey: queries.decks.all(user.id).queryKey,
-    queryFn: () => getDecks(user.id),
+    queryKey: queries.decks.all.queryKey,
+    queryFn: () => getDecks(),
   });
 }
 
 export function useUserDeckDelete() {
-  const user = useUser();
-
   return useMutation<boolean, ClientResponseError, string>({
     mutationFn: (deckId) => deleteDeck(deckId),
     mutationKey: ['deleteDeck'],
     onSuccess: (isSuccessDelete) => {
       queryClient.invalidateQueries({
-        queryKey: queries.decks.all(user.id).queryKey,
+        queryKey: queries.decks.all.queryKey,
       });
     },
   });
