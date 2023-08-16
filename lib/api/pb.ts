@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase';
 
+import { AsyncAuthStore } from './auth-store';
 import { config } from '../config';
 import {
   Collections,
@@ -8,7 +9,10 @@ import {
   UsersResponse,
 } from '../types';
 
-export const pb = new PocketBase(config.EXPO_PUBLIC_API_URL);
+export const pb = new PocketBase(
+  config.EXPO_PUBLIC_API_URL,
+  new AsyncAuthStore(),
+);
 
 export function getDecks(userId: string) {
   return pb.collection(Collections.Decks).getFullList<DecksResponse>({
@@ -27,7 +31,10 @@ export function loginWithEmailPassword(email: string, password: string) {
 }
 
 export function createDeck(
-  deck: Pick<DecksRecord, 'color' | 'name' | 'description'>,
+  deck: Pick<
+    DecksRecord,
+    'color' | 'name' | 'description' | 'user' | 'lastEdited'
+  >,
 ) {
   return pb.collection(Collections.Decks).create<DecksResponse>(deck);
 }
