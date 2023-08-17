@@ -1,4 +1,3 @@
-import { Link } from 'expo-router';
 import { YStack, XStack, ScrollView } from 'tamagui';
 
 import { Text } from '../../components';

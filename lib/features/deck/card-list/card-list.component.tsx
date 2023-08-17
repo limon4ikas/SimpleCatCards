@@ -13,13 +13,11 @@ export function CardList({ cards }: CardListProps) {
 
   return (
     <YStack>
-      <XStack justifyContent="space-between" alignItems="center">
-        <Text type="title-1" marginBottom="$4">
-          Cards
-        </Text>
+      <XStack justifyContent="space-between" alignItems="center" mb="$3">
+        <Text type="title-1">Cards</Text>
         <XStack alignItems="center" gap="$2">
           <Layers size={24} color={getTokenValue('$blue10Light', 'color')} />
-          <Text type="headline">{cards.length} cards</Text>
+          <Text type="callout">{cards.length} cards</Text>
         </XStack>
       </XStack>
       <YStack>
