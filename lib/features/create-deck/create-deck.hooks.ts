@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { ClientResponseError } from 'pocketbase';
 
 import { CreateDeckFormT } from './create-deck.component';
-import { createDeck, queries, queryClient } from '../../api';
+import { api, queries, queryClient } from '../../api';
 import { DecksResponse } from '../../types';
 import { useUser } from '../auth';
 
@@ -11,7 +11,7 @@ export function useCreateDeckMutation() {
 
   return useMutation<DecksResponse, ClientResponseError, CreateDeckFormT>({
     mutationFn: (variables) =>
-      createDeck({
+      api.createDeck({
         ...variables,
         user: user.id,
         lastEdited: new Date().toISOString(),

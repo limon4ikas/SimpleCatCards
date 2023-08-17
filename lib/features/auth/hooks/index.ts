@@ -1,58 +1,22 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useURL } from 'expo-linking';
 import { useRouter } from 'expo-router';
 import {
   AuthMethodsList,
   AuthProviderInfo,
   ClientResponseError,
-  RecordAuthResponse,
 } from 'pocketbase';
 import { useEffect } from 'react';
 
-import {
-  getAuthProviders,
-  loginWithEmailPassword,
-  pb,
-  queries,
-  registerWithEmailPassword,
-} from '../../../api';
+import { api, pb, queries } from '../../../api';
 import { config } from '../../../config';
-import { Collections, UsersResponse } from '../../../types';
-import {
-  LoginWithEmailPassword,
-  RegisterWithEmailPassword,
-} from '../../../types/api';
-
-export function useLoginWithEmailPasswordMutation() {
-  const router = useRouter();
-
-  return useMutation<
-    RecordAuthResponse<UsersResponse>,
-    ClientResponseError,
-    LoginWithEmailPassword
-  >({
-    mutationFn: ({ email, password }) =>
-      loginWithEmailPassword(email, password),
-    onSuccess: () => router.push('/(home)/decks/overview'),
-  });
-}
+import { Collections } from '../../../types';
 
 export function useQueryAuthMethods() {
   return useQuery<AuthMethodsList, ClientResponseError>({
     queryKey: queries.authMethods._def,
-    queryFn: () => getAuthProviders(),
-  });
-}
-
-export function useRegisterWithEmailPasswordMutation() {
-  return useMutation<
-    UsersResponse,
-    ClientResponseError,
-    RegisterWithEmailPassword
-  >({
-    mutationFn: ({ email, password, passwordConfirm }) =>
-      registerWithEmailPassword(email, password, passwordConfirm),
+    queryFn: () => api.getAuthProviders(),
   });
 }
 
