@@ -3,17 +3,10 @@ import { AuthProviderInfo } from 'pocketbase';
 import { ActivityIndicator, Linking } from 'react-native';
 import { Button, YStack, Text } from 'tamagui';
 
-import {
-  useLoginWithEmailPasswordMutation,
-  useOAuth,
-  useQueryAuthMethods,
-} from './hooks';
-import { LoginForm } from './login-form.component';
+import { useOAuth, useQueryAuthMethods } from './hooks';
 import { config } from '../../config';
-import { LoginWithEmailPassword } from '../../types/api';
 
 export function LoginFormContainer() {
-  const loginWithPassword = useLoginWithEmailPasswordMutation();
   const { data, status, error } = useQueryAuthMethods();
   useOAuth();
 
@@ -21,10 +14,6 @@ export function LoginFormContainer() {
     await AsyncStorage.setItem('provider', JSON.stringify(provider));
 
     Linking.openURL(`${provider.authUrl}${config.EXPO_PUBLIC_REDIRECT_URL}`);
-  }
-
-  function handleLoginFormSubmit(credentials: LoginWithEmailPassword) {
-    loginWithPassword.mutate(credentials);
   }
 
   if (status === 'loading') {
@@ -39,10 +28,6 @@ export function LoginFormContainer() {
 
   return (
     <YStack flex={1} justifyContent="center" p="$4" gap="$4">
-      <LoginForm
-        onSubmit={handleLoginFormSubmit}
-        fetchError={loginWithPassword.error?.message}
-      />
       <ProviderList
         providers={data.authProviders}
         onProviderAuth={handleProviderAuthClick}
