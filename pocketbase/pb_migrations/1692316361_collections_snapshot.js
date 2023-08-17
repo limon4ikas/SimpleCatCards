@@ -3,7 +3,7 @@ migrate((db) => {
     {
       "id": "u9pul9c8rrrq201",
       "created": "2023-08-14 01:58:29.724Z",
-      "updated": "2023-08-16 08:13:40.464Z",
+      "updated": "2023-08-16 08:32:37.084Z",
       "name": "decks",
       "type": "base",
       "system": false,
@@ -113,7 +113,7 @@ migrate((db) => {
     {
       "id": "6mpr0zcsa99a0zm",
       "created": "2023-08-14 02:00:40.738Z",
-      "updated": "2023-08-16 08:13:40.464Z",
+      "updated": "2023-08-16 08:32:37.085Z",
       "name": "flashcards",
       "type": "base",
       "system": false,
@@ -219,7 +219,7 @@ migrate((db) => {
     {
       "id": "_pb_users_auth_",
       "created": "2023-08-16 04:01:53.082Z",
-      "updated": "2023-08-16 08:13:40.464Z",
+      "updated": "2023-08-16 08:32:37.085Z",
       "name": "users",
       "type": "auth",
       "system": false,
