@@ -56,6 +56,7 @@
     "react-native-svg": "13.9.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.7",
+    "supermemo": "^2.0.17",
     "tamagui": "^1.52.2",
     "zod": "^3.21.4"
   },

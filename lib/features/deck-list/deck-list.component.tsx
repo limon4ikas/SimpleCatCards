@@ -1,11 +1,11 @@
 import { Feather } from '@expo/vector-icons';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'expo-router';
+import { Trash } from 'lucide-react-native';
 import { useState } from 'react';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
-  FadeIn,
   FadeOut,
   Layout,
   runOnJS,
@@ -13,9 +13,10 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { Input, Text, View, XStack, YStack, getTokens } from 'tamagui';
+import { View, XStack, YStack, getTokens } from 'tamagui';
 
 import { useDeckList } from './deck-list.hooks';
+import { Card, Text, TextInput } from '../../components';
 import { DecksResponse } from '../../types';
 
 export type DeckListProps = {
@@ -30,31 +31,18 @@ export function DeckList(props: DeckListProps) {
 
   return (
     <YStack space="$3.5">
-      <Input
-        flex={1}
-        size="$3"
+      <TextInput
         placeholder="Search..."
         value={filterName}
         onChangeText={setFilterName}
-        fontFamily="$rounded"
-        fontSize={16}
-        fontWeight="400"
-        backgroundColor="$gray3"
-        borderRadius="$8"
-        px="$4"
-        placeholderTextColor="$gray11"
-        borderWidth={0}
       />
       <XStack justifyContent="flex-start">
-        <Text fontSize="$9" fontWeight="600" fontFamily="$rounded">
-          {label}
-        </Text>
+        <Text type="large-title">{label}</Text>
       </XStack>
 
       <YStack space="$2" borderRadius="$6">
-        {filteredDecks.map((deck, idx) => (
+        {filteredDecks.map((deck, _idx) => (
           <DeckListItem
-            index={idx}
             key={deck.id}
             id={deck.id}
             name={deck.name}
@@ -77,7 +65,6 @@ const THRESHOLD = -WIDTH / 4;
 const SPACE_FOR_BUTTON = THRESHOLD / 2;
 
 type DeckListItemProps = {
-  index: number;
   id: string;
   name: string;
   cardsCount: number;
@@ -88,16 +75,8 @@ type DeckListItemProps = {
 };
 
 function DeckListItem(props: DeckListItemProps) {
-  const {
-    cardsCount,
-    lastAttempted,
-    lastEdited,
-    name,
-    onDelete,
-    id,
-    index,
-    color,
-  } = props;
+  const { cardsCount, lastAttempted, lastEdited, name, onDelete, id, color } =
+    props;
   const [isDisabled, setIsDisabled] = useState(false);
   const x = useSharedValue(0);
   const offsetX = useSharedValue(0);
@@ -126,23 +105,12 @@ function DeckListItem(props: DeckListItemProps) {
   });
 
   return (
-    <Animated.View
-      entering={FadeIn.delay(200 * index + 1)}
-      exiting={FadeOut}
-      layout={Layout.delay(100)}
-    >
+    <Animated.View exiting={FadeOut} layout={Layout.delay(100)}>
       <GestureDetector gesture={panGesture}>
         <Animated.View
           style={[{ position: 'relative', zIndex: 1 }, xTransform]}
         >
-          <View
-            bg="white"
-            shadowColor="$shadowColor"
-            shadowOffset={{ width: 0, height: 8 }}
-            shadowOpacity={0.1}
-            shadowRadius={18}
-            borderRadius="$5"
-          >
+          <Card size="large">
             <Link
               href={{
                 pathname: '/(home)/decks/deck/[id]',
@@ -152,35 +120,26 @@ function DeckListItem(props: DeckListItemProps) {
               disabled={isDisabled}
             >
               <TouchableOpacity>
-                <YStack space="$2.5" px="$4" py="$3">
-                  <XStack>
-                    <Text
-                      fontFamily="$rounded"
-                      fontSize={17}
-                      fontWeight="600"
-                      color={color}
-                    >
-                      {name}
-                    </Text>
-                  </XStack>
+                <YStack space="$2.5">
+                  <Text type="title-3" color={color}>
+                    {name}
+                  </Text>
 
                   <XStack justifyContent="space-between">
                     <XStack space="$2">
                       <XStack alignItems="center" gap="$2">
                         <Feather name="layers" size={14} />
-                        <Text fontFamily="$rounded" fontSize={14}>
-                          {cardsCount}
-                        </Text>
+                        <Text type="footnote">{cardsCount}</Text>
                       </XStack>
 
                       <XStack alignItems="center" gap="$2">
                         <Feather name="edit" size={14} />
-                        <Text fontFamily="$rounded" fontSize={14}>
+                        <Text type="footnote">
                           {formatDistanceToNow(lastEdited)} ago
                         </Text>
                       </XStack>
                     </XStack>
-                    <Text fontFamily="$rounded" fontSize={14}>
+                    <Text type="footnote">
                       {lastAttempted
                         ? `${formatDistanceToNow(lastAttempted)} ago`
                         : null}
@@ -189,16 +148,12 @@ function DeckListItem(props: DeckListItemProps) {
                 </YStack>
               </TouchableOpacity>
             </Link>
-          </View>
+          </Card>
         </Animated.View>
       </GestureDetector>
       <View position="absolute" right={10} top="30%">
         <TouchableOpacity onPress={() => onDelete?.(id)}>
-          <Feather
-            name="trash"
-            size={24}
-            color={getTokens().color.$red10Light.val}
-          />
+          <Trash size={24} color={getTokens().color.$red10Light.val} />
         </TouchableOpacity>
       </View>
     </Animated.View>

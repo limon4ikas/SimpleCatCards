@@ -1,5 +1,3 @@
-import { LoginFormContainer } from '../../lib/features/auth';
+import { LoginScreen } from '../../lib/features';
 
-export default function LoginScreen() {
-  return <LoginFormContainer />;
-}
+export default LoginScreen;

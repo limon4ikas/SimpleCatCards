@@ -11,6 +11,9 @@ export const queries = createQueryKeyStore({
   decks: {
     all: null,
     recentlyReviewed: null,
+    single: (deckId: string) => ({
+      queryKey: [deckId],
+    }),
   },
 });
 

@@ -8,7 +8,7 @@ const StyledInput = styled(Input, {
   backgroundColor: '$gray3',
   placeholderTextColor: '$gray10',
   fontWeight: '600',
-  fontSize: 16,
+  fontSize: 17,
   borderWidth: 0,
 });
 

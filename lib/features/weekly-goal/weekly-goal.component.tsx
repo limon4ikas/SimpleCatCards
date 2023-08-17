@@ -1,6 +1,8 @@
 import { eachDayOfInterval, startOfWeek, endOfWeek, format } from 'date-fns';
 import { Flame, Check } from 'lucide-react-native';
-import { YStack, Text, XStack, View, getToken } from 'tamagui';
+import { YStack, XStack, View, getToken } from 'tamagui';
+
+import { Card, Text } from '../../components';
 
 export function WeeklyGoal() {
   const now = new Date();
@@ -10,21 +12,8 @@ export function WeeklyGoal() {
   });
 
   return (
-    <YStack
-      backgroundColor="white"
-      bg="white"
-      shadowColor="$shadowColor"
-      shadowOffset={{ width: 0, height: 8 }}
-      shadowOpacity={0.1}
-      shadowRadius={18}
-      borderRadius="$5"
-      p="$4"
-      gap="$4"
-    >
-      <Text fontFamily="$rounded" fontWeight="600" fontSize={18}>
-        Weekly goal
-      </Text>
-
+    <Card gap="$4" size="large">
+      <Text type="title-2">Weekly goal</Text>
       <XStack justifyContent="space-between">
         {weekDays.map((day) => (
           <WeekDayCheckMark key={day.toDateString()} day={day} />
@@ -33,7 +22,7 @@ export function WeeklyGoal() {
       <YStack alignSelf="center">
         <LearningStreak streak={2} />
       </YStack>
-    </YStack>
+    </Card>
   );
 }
 
@@ -45,12 +34,12 @@ function LearningStreak({ streak }: LearningStreakProps) {
   return (
     <YStack gap="$2">
       <XStack gap="$1" alignItems="center" justifyContent="center">
-        <Flame size={24} color={getToken('$color.blue10Light')} />
-        <Text fontFamily="$rounded" fontSize={16} alignSelf="flex-end">
+        <Flame size={22} color={getToken('$color.blue10Light')} />
+        <Text type="subhead" alignSelf="flex-end">
           {streak}
         </Text>
       </XStack>
-      <Text fontFamily="$rounded">Learning streak</Text>
+      <Text type="subhead">Learning streak</Text>
     </YStack>
   );
 }
@@ -74,7 +63,7 @@ function WeekDayCheckMark(props: WeekDayCheckMarkProps) {
       >
         <Check size={20} color="white" />
       </View>
-      <Text fontFamily="$rounded">{format(day, 'EEE')}</Text>
+      <Text type="footnote">{format(day, 'EEE')}</Text>
     </YStack>
   );
 }

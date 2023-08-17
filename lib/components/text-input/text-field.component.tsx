@@ -7,7 +7,7 @@ import {
   useController,
 } from 'react-hook-form';
 
-import { TextInput } from './text-input';
+import { TextInput } from './text-input.component.tsx';
 
 export type TextFieldProps<FormValues extends FieldValues> = Omit<
   UseControllerProps<FormValues>,

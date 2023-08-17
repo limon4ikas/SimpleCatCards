@@ -1,5 +1,6 @@
-import { Text, YStack } from 'tamagui';
+import { YStack } from 'tamagui';
 
+import { Text } from '../../components';
 import { DecksResponse } from '../../types';
 
 type RecentlyReviewedProps = { decks: DecksResponse[] };
@@ -10,7 +11,7 @@ export function RecentlyReviewed({ decks }: RecentlyReviewedProps) {
       <Text>Recently Reviewed</Text>
       <YStack>
         {decks.map((deck) => (
-          <Text>{deck.name}</Text>
+          <Text key={deck.id}>{deck.name}</Text>
         ))}
       </YStack>
     </YStack>

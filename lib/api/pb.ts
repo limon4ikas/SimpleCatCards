@@ -4,8 +4,10 @@ import { AsyncAuthStore } from './auth-store';
 import { config } from '../config';
 import {
   Collections,
+  DeckWithCards,
   DecksRecord,
   DecksResponse,
+  FlashcardsResponse,
   UsersResponse,
 } from '../types';
 
@@ -41,21 +43,15 @@ export function getAuthProviders() {
   return pb.collection(Collections.Users).listAuthMethods();
 }
 
-export async function registerWithEmailPassword(
-  email: string,
-  password: string,
-  passwordConfirm: string,
-) {
-  return pb.collection(Collections.Users).create<UsersResponse>({
-    email,
-    password,
-    passwordConfirm,
-  });
-}
-
 export function getRecentlyReviewed() {
   return pb
     .collection(Collections.Decks)
     .getList<DecksResponse>(1, 4, { sort: '-lastAttempted' })
     .then((d) => d.items);
+}
+
+export function getDeckWithCards(deckId: string) {
+  return pb.collection(Collections.Decks).getOne<DeckWithCards>(deckId, {
+    expand: 'cards',
+  });
 }
