@@ -3,13 +3,10 @@ import { Flame, Check } from 'lucide-react-native';
 import { YStack, XStack, View, getToken } from 'tamagui';
 
 import { Card, Text } from '../../components';
+import { getCurrentWeekdays } from '../../utils';
 
 export function WeeklyGoal() {
-  const now = new Date();
-  const weekDays = eachDayOfInterval({
-    start: startOfWeek(now),
-    end: endOfWeek(now),
-  });
+  const weekDays = getCurrentWeekdays();
 
   return (
     <Card gap="$4" size="large">

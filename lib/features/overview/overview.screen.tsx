@@ -16,7 +16,6 @@ export function OverviewScreen() {
         <WeeklyGoalContainer />
         <WeeklyProgressContainer />
         <RecentlyReviewedContainer />
-        <Link href="/(home)/decks/">Decks</Link>
       </YStack>
     </ScrollView>
   );

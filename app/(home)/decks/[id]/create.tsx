@@ -1,5 +1,3 @@
-import { Text } from 'tamagui';
+import { AddCardsFormScreen } from '../../../../lib/features';
 
-export default function AddCards() {
-  return <Text>Create Cards</Text>;
-}
+export default AddCardsFormScreen;

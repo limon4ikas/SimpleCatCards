@@ -6,3 +6,4 @@ export * from './weekly-goal';
 export * from './recently-reviewed';
 export * from './create-deck';
 export * from './auth';
+export * from './add-cards-form';

@@ -1,8 +1,8 @@
 import { ActivityIndicator, Alert } from 'react-native';
-import { Text } from 'tamagui';
 
 import { DeckList } from './deck-list.component';
 import { useUserDecks, useUserDeckDelete } from './deck-list.hooks';
+import { Text } from '../../components';
 
 export function DeckListContainer() {
   const { data, status, error } = useUserDecks();
@@ -24,6 +24,11 @@ export function DeckListContainer() {
   if (status === 'error') return <Text>{error.message}</Text>;
 
   return (
-    <DeckList label="Your decks" decks={data} onDeckDelete={handleDeckDelete} />
+    <DeckList
+      label={<Text type="large-title">Your decks</Text>}
+      decks={data}
+      onDeckDelete={handleDeckDelete}
+      withSearch
+    />
   );
 }

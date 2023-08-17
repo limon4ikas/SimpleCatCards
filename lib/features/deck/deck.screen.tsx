@@ -1,9 +1,4 @@
-import {
-  Link,
-  Stack,
-  useGlobalSearchParams,
-  useLocalSearchParams,
-} from 'expo-router';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { Plus } from 'lucide-react-native';
 import { TouchableOpacity } from 'react-native';
 import { ScrollView, YStack } from 'tamagui';
@@ -12,10 +7,7 @@ import { CardListContainer } from './card-list';
 import { DeckScreenParams } from '../../types';
 
 export function DeckScreen() {
-  const params = useGlobalSearchParams<DeckScreenParams>();
-
-  console.log('GLOBAL', useGlobalSearchParams());
-  console.log('LOCAL', useLocalSearchParams());
+  const params = useLocalSearchParams<DeckScreenParams>();
 
   return (
     <>

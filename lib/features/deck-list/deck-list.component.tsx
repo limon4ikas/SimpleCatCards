@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'expo-router';
 import { Trash } from 'lucide-react-native';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -20,25 +20,26 @@ import { Card, Text, TextInput } from '../../components';
 import { DecksResponse } from '../../types';
 
 export type DeckListProps = {
-  label: string;
+  label: ReactNode;
   decks: DecksResponse[];
   onDeckDelete?: (deckId: string) => void;
+  withSearch?: boolean;
 };
 
 export function DeckList(props: DeckListProps) {
-  const { label, decks, onDeckDelete } = props;
+  const { label, decks, withSearch, onDeckDelete } = props;
   const { filterName, setFilterName, filteredDecks } = useDeckList({ decks });
 
   return (
     <YStack space="$3.5">
-      <TextInput
-        placeholder="Search..."
-        value={filterName}
-        onChangeText={setFilterName}
-      />
-      <XStack justifyContent="flex-start">
-        <Text type="large-title">{label}</Text>
-      </XStack>
+      {withSearch ? (
+        <TextInput
+          placeholder="Search..."
+          value={filterName}
+          onChangeText={setFilterName}
+        />
+      ) : null}
+      <XStack justifyContent="flex-start">{label}</XStack>
 
       <YStack space="$2" borderRadius="$6">
         {filteredDecks.map((deck, _idx) => (

@@ -1,7 +1,9 @@
-import { Text } from 'tamagui';
+import { Link } from 'expo-router';
+import { YStack } from 'tamagui';
 
-import { RecentlyReviewed } from './recently-reviewed.component';
 import { useQueryRecentlyReviewed } from './recently-reviewed.hooks';
+import { Button, Text } from '../../components';
+import { DeckList } from '../deck-list/deck-list.component';
 
 export function RecentlyReviewedContainer() {
   const { data, status, error } = useQueryRecentlyReviewed();
@@ -10,5 +12,14 @@ export function RecentlyReviewedContainer() {
 
   if (status === 'error') return <Text>{error.message}</Text>;
 
-  return <RecentlyReviewed decks={data} />;
+  return (
+    <YStack gap="$4">
+      <DeckList label={<Text type="title-1">Recent decks</Text>} decks={data} />
+      <Link href="/(home)/decks/" asChild>
+        <Button size="$4" withElevationShadow>
+          All decks
+        </Button>
+      </Link>
+    </YStack>
+  );
 }

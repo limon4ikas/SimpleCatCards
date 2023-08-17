@@ -4,6 +4,7 @@ import {
   createStyledContext,
   withStaticProperties,
 } from 'tamagui';
+
 import { Text } from '../text';
 
 export const CardContext = createStyledContext({});
