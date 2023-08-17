@@ -2,7 +2,7 @@ import { View, YStack } from 'tamagui';
 
 import { CardList } from './card-list.component';
 import { useCardListQuery } from './card-list.hooks';
-import { Card, Text } from '../../../components';
+import { Text } from '../../../components';
 
 export type CardListContainerProps = {
   label: string;
@@ -18,17 +18,13 @@ export function CardListContainer({ deckId, label }: CardListContainerProps) {
 
   return (
     <YStack gap="$4">
-      <Card size="large">
-        <YStack gap="$1.5">
-          <Text type="large-title" color={data.color}>
-            {label}
-          </Text>
-          <Text type="subhead">{data.description}</Text>
-        </YStack>
-      </Card>
-      <View px="$4">
-        <CardList cards={data.expand?.cards} />
-      </View>
+      <YStack gap="$1.5">
+        <Text type="large-title" color={data.color}>
+          {label}
+        </Text>
+        <Text type="subhead">{data.description}</Text>
+      </YStack>
+      <CardList cards={data.expand?.cards} />
     </YStack>
   );
 }

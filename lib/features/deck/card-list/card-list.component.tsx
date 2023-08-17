@@ -20,7 +20,7 @@ export function CardList({ cards }: CardListProps) {
           <Text type="callout">{cards.length} cards</Text>
         </XStack>
       </XStack>
-      <YStack>
+      <YStack gap="$2">
         {cards.map((card) => (
           <CardListItem key={card.id} back={card.back} front={card.front} />
         ))}

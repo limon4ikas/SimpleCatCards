@@ -2,6 +2,9 @@ import { Button as TamaButton, styled } from 'tamagui';
 
 export const Button = styled(TamaButton, {
   name: 'MyButton',
+  fontFamily: '$rounded',
+  fontWeight: '600',
+  fontSize: 16,
   variants: {
     variant: {
       primary: {

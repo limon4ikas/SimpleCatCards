@@ -17,6 +17,7 @@ const CardFrame = styled(Stack, {
   shadowOpacity: 0.1,
   shadowRadius: 18,
   borderRadius: '$5',
+  elevationAndroid: 15,
   padding: '$4',
   context: CardContext,
   variants: {

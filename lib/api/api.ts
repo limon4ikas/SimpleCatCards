@@ -4,6 +4,8 @@ import {
   DeckWithCards,
   DecksRecord,
   DecksResponse,
+  FlashcardsRecord,
+  FlashcardsResponse,
 } from '../types';
 
 export const api = {
@@ -34,5 +36,41 @@ export const api = {
     return pb.collection(Collections.Decks).getOne<DeckWithCards>(deckId, {
       expand: 'cards',
     });
+  },
+  async createCards(deckId: string, cards: { front: string; back: string }[]) {
+    const flashcards: FlashcardsRecord[] = cards.map(({ back, front }) => ({
+      back,
+      front,
+      dueDate: new Date().toISOString(),
+      deck: deckId,
+      interval: 0,
+      repetition: 0,
+      efactor: 2.5,
+    }));
+
+    const currentDeck = await pb
+      .collection(Collections.Decks)
+      .getOne<DecksResponse>(deckId);
+
+    // 1. Create cards
+    const createdCardsPromises = flashcards.map(async (record) => {
+      return pb
+        .collection(Collections.Flashcards)
+        .create<FlashcardsResponse>(record, {
+          $autoCancel: false,
+        });
+    });
+
+    const createdCardIds = (await Promise.all(createdCardsPromises)).map(
+      (card) => card.id,
+    );
+
+    return pb.collection(Collections.Decks).update<DecksResponse>(
+      currentDeck.id,
+      {
+        cards: [...currentDeck.cards, ...createdCardIds],
+      },
+      { $autoCancel: false },
+    );
   },
 } as const;
