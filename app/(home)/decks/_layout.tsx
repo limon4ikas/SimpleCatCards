@@ -11,7 +11,11 @@ export default function DecksLayout() {
     <MyStack>
       <Stack.Screen name="overview" options={{ title: 'Overview' }} />
       <Stack.Screen name="index" options={{ title: 'Decks' }} />
-      <Stack.Screen name="deck/[id]" options={{ title: 'Decks' }} />
+      <Stack.Screen name="[id]/index" options={{ title: 'Decks' }} />
+      <Stack.Screen
+        name="[id]/create"
+        options={{ presentation: 'modal', headerShown: false }}
+      />
       <Stack.Screen name="create" options={{ presentation: 'modal' }} />
     </MyStack>
   );

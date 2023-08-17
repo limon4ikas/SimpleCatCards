@@ -113,7 +113,7 @@ function DeckListItem(props: DeckListItemProps) {
           <Card size="large">
             <Link
               href={{
-                pathname: '/(home)/decks/deck/[id]',
+                pathname: '/(home)/decks/[id]/',
                 params: { id, name },
               }}
               asChild

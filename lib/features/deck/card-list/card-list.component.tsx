@@ -1,16 +1,27 @@
-import { YStack } from 'tamagui';
+import { Layers } from 'lucide-react-native';
+import { XStack, YStack, getTokenValue } from 'tamagui';
 
-import { Text } from '../../../components';
+import { Card, Text } from '../../../components';
 import { FlashcardsResponse } from '../../../types';
 
-export type CardListProps = { cards?: FlashcardsResponse[] };
+export type CardListProps = {
+  cards?: FlashcardsResponse[];
+};
 
 export function CardList({ cards }: CardListProps) {
   if (!cards) return <Text>No cards...</Text>;
 
   return (
     <YStack>
-      <Text>Card list</Text>
+      <XStack justifyContent="space-between" alignItems="center">
+        <Text type="title-1" marginBottom="$4">
+          Cards
+        </Text>
+        <XStack alignItems="center" gap="$2">
+          <Layers size={24} color={getTokenValue('$blue10Light', 'color')} />
+          <Text type="headline">{cards.length} cards</Text>
+        </XStack>
+      </XStack>
       <YStack>
         {cards.map((card) => (
           <CardListItem key={card.id} back={card.back} front={card.front} />
@@ -29,8 +40,8 @@ function CardListItem(props: CardListItemProps) {
   const { front, back } = props;
 
   return (
-    <YStack>
+    <Card size="large">
       <Text>{front}</Text>
-    </YStack>
+    </Card>
   );
 }
