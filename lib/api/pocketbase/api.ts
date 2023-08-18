@@ -1,3 +1,6 @@
+import { addDays } from 'date-fns';
+import { SuperMemoItem } from 'supermemo';
+
 import { pb } from './pb';
 import {
   Collections,
@@ -73,4 +76,17 @@ export const api = {
       { $autoCancel: false },
     );
   },
+  async practiceCard (item:{ cardId: string; deckId: string; update: SuperMemoItem }) {
+
+    const updatedCard = await pb.collection(Collections.Flashcards).update<FlashcardsResponse>(item.cardId, {
+      ...item.update,
+      dueDate: addDays(new Date(), item.update.interval).toISOString()
+    })
+
+    await pb.collection(Collections.Decks).update<DecksResponse>(item.deckId, {
+      lastAttempted: new Date().toISOString()
+    })
+
+    return updatedCard
+  }
 } as const;

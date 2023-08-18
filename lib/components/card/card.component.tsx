@@ -20,9 +20,7 @@ const CardFrame = styled(Stack, {
   elevationAndroid: 15,
   padding: '$4',
   context: CardContext,
-  variants: {
-    size: { large: { px: '$4', py: '$3' } },
-  } as const,
+  variants: { size: { large: { px: '$4', py: '$3' } } } as const,
 });
 
 const CardLabel = styled(Text, {
