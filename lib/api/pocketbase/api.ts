@@ -6,7 +6,7 @@ import {
   DecksResponse,
   FlashcardsRecord,
   FlashcardsResponse,
-} from '../types';
+} from '../../types';
 
 export const api = {
   getDecks() {

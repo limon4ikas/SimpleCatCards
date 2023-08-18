@@ -2,8 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { ClientResponseError } from 'pocketbase';
 import { useMemo, useState } from 'react';
 
-import { api } from '../../api';
-import { queries, queryClient } from '../../api/queries';
+import { api, queries, queryClient } from '../../api';
 import { DecksResponse } from '../../types';
 
 type UseDeckListConfig = {
