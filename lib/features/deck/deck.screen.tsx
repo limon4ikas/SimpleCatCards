@@ -1,17 +1,18 @@
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { Plus } from 'lucide-react-native';
-import { TouchableOpacity } from 'react-native';
-import { ScrollView, YStack } from 'tamagui';
+import { SafeAreaView, TouchableOpacity } from 'react-native';
+import { ScrollView, View, YStack } from 'tamagui';
 
 import { CardListContainer } from './card-list';
+import { Button } from '../../components';
 import { DeckScreenParams } from '../../types';
 
 export function DeckScreen() {
   const params = useLocalSearchParams<DeckScreenParams>();
 
   return (
-    <>
-      <ScrollView p="$4">
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView p="$4" flex={1}>
         <Stack.Screen
           options={{
             title: params.name,
@@ -34,6 +35,13 @@ export function DeckScreen() {
           <CardListContainer label={params.name} deckId={params.id} />
         </YStack>
       </ScrollView>
-    </>
+      <View px="$4">
+        <Link href={{ pathname: '/(home)/decks/[id]/review', params }} asChild>
+          <Button withElevationShadow position="fixed" bottom={20} left={0}>
+            Review
+          </Button>
+        </Link>
+      </View>
+    </SafeAreaView>
   );
 }

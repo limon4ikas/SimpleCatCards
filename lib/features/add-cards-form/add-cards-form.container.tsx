@@ -1,5 +1,4 @@
 import { useRouter } from 'expo-router';
-import { YStack } from 'tamagui';
 
 import { AddCardsForm, AddCardsFormT } from './add-cards-form.component';
 import { useAddCardsMutation } from './add-cards-form.hooks';
@@ -11,14 +10,15 @@ export function AddCardsFormContainer({ deckId }: AddCardsFormContainerProps) {
   const createCards = useAddCardsMutation();
 
   async function handleSubmit(values: AddCardsFormT) {
-    await createCards.mutateAsync({ deckId, cards: values.cards });
+    await createCards.mutateAsync({
+      deckId,
+      cards: values.cards.filter(
+        (card) => card.front.length && card.back.length,
+      ),
+    });
 
     router.back();
   }
 
-  return (
-    <YStack p="$4">
-      <AddCardsForm onSubmit={handleSubmit} />
-    </YStack>
-  );
+  return <AddCardsForm onSubmit={handleSubmit} />;
 }

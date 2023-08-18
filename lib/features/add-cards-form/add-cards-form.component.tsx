@@ -6,14 +6,15 @@ import { ScrollView, YStack } from 'tamagui';
 import { z } from 'zod';
 
 import { Button, Card, Text, TextInput } from '../../components';
+import { FlashcardsRecord } from '../../types';
 
-type Card = { front: string; back: string };
+type CardModel = Pick<FlashcardsRecord, 'front' | 'back'>;
 
 export const AddCardsFormSchema = z.object({
   cards: z.array(
     z.object({
-      front: z.string().min(1),
-      back: z.string().min(1),
+      front: z.string(),
+      back: z.string(),
     }),
   ),
 });
@@ -43,7 +44,7 @@ export function AddCardsForm({ onSubmit }: AddCardsFormProps) {
   }
 
   function handleCardChange(idx: number) {
-    return (updatedCard: Card) => {
+    return (updatedCard: CardModel) => {
       const cards = getValues().cards;
       setValue(
         'cards',
@@ -67,7 +68,7 @@ export function AddCardsForm({ onSubmit }: AddCardsFormProps) {
           ),
         }}
       />
-      <ScrollView>
+      <ScrollView flex={1} p="$4">
         <YStack gap="$4" flex={1} justifyContent="flex-end">
           <YStack gap="$2">
             {fields.map((cardField, index) => (
@@ -88,14 +89,14 @@ export function AddCardsForm({ onSubmit }: AddCardsFormProps) {
 }
 
 type CardInputProps = {
-  value: Card;
-  onChange: (updatedCard: Card) => void;
+  value: CardModel;
+  onChange: (updatedCard: CardModel) => void;
   frontError?: string;
   backError?: string;
 };
 
 function CardInput({ value, onChange, frontError, backError }: CardInputProps) {
-  function handleTextChange(inputKey: keyof Card) {
+  function handleTextChange(inputKey: keyof CardModel) {
     return (text: string) => onChange?.({ ...value, [inputKey]: text });
   }
 
