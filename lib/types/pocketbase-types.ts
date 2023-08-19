@@ -5,6 +5,7 @@
 export enum Collections {
   Decks = 'decks',
   Flashcards = 'flashcards',
+  Sessions = 'sessions',
   Users = 'users',
 }
 
@@ -40,6 +41,7 @@ export type DecksRecord = {
   color: string;
   cards?: RecordIdString[];
   user?: RecordIdString;
+  sessions?: RecordIdString[];
 };
 
 export type FlashcardsRecord = {
@@ -50,6 +52,12 @@ export type FlashcardsRecord = {
   repetition?: number;
   efactor?: number;
   dueDate: IsoDateString;
+};
+
+export type SessionsRecord = {
+  sessionDate?: IsoDateString;
+  cardsTrained?: RecordIdString[];
+  deck?: RecordIdString;
 };
 
 export type UsersRecord = {
@@ -63,6 +71,8 @@ export type DecksResponse<Texpand = unknown> = Required<DecksRecord> &
   BaseSystemFields<Texpand>;
 export type FlashcardsResponse<Texpand = unknown> = Required<FlashcardsRecord> &
   BaseSystemFields<Texpand>;
+export type SessionsResponse<Texpand = unknown> = Required<SessionsRecord> &
+  BaseSystemFields<Texpand>;
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> &
   AuthSystemFields<Texpand>;
 
@@ -71,11 +81,13 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> &
 export type CollectionRecords = {
   decks: DecksRecord;
   flashcards: FlashcardsRecord;
+  sessions: SessionsRecord;
   users: UsersRecord;
 };
 
 export type CollectionResponses = {
   decks: DecksResponse;
   flashcards: FlashcardsResponse;
+  sessions: SessionsResponse;
   users: UsersResponse;
 };

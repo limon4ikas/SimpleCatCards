@@ -35,7 +35,7 @@ export type CardListItemProps = {
 };
 
 function CardListItem(props: CardListItemProps) {
-  const { front, back } = props;
+  const { front } = props;
 
   return (
     <Card size="large">

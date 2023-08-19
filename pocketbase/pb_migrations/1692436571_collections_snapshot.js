@@ -3,7 +3,7 @@ migrate((db) => {
     {
       "id": "u9pul9c8rrrq201",
       "created": "2023-08-14 01:58:29.724Z",
-      "updated": "2023-08-16 08:32:37.084Z",
+      "updated": "2023-08-19 09:14:58.291Z",
       "name": "decks",
       "type": "base",
       "system": false,
@@ -100,6 +100,21 @@ migrate((db) => {
             "maxSelect": 1,
             "displayFields": []
           }
+        },
+        {
+          "system": false,
+          "id": "jllkwwgq",
+          "name": "sessions",
+          "type": "relation",
+          "required": false,
+          "unique": false,
+          "options": {
+            "collectionId": "g2w78rbhhhf14bk",
+            "cascadeDelete": false,
+            "minSelect": null,
+            "maxSelect": null,
+            "displayFields": []
+          }
         }
       ],
       "indexes": [],
@@ -113,7 +128,7 @@ migrate((db) => {
     {
       "id": "6mpr0zcsa99a0zm",
       "created": "2023-08-14 02:00:40.738Z",
-      "updated": "2023-08-16 08:32:37.085Z",
+      "updated": "2023-08-19 09:10:55.252Z",
       "name": "flashcards",
       "type": "base",
       "system": false,
@@ -219,7 +234,7 @@ migrate((db) => {
     {
       "id": "_pb_users_auth_",
       "created": "2023-08-16 04:01:53.082Z",
-      "updated": "2023-08-16 08:32:37.085Z",
+      "updated": "2023-08-19 09:10:55.252Z",
       "name": "users",
       "type": "auth",
       "system": false,
@@ -290,6 +305,65 @@ migrate((db) => {
         "onlyEmailDomains": null,
         "requireEmail": false
       }
+    },
+    {
+      "id": "g2w78rbhhhf14bk",
+      "created": "2023-08-19 09:06:31.341Z",
+      "updated": "2023-08-19 09:10:55.252Z",
+      "name": "sessions",
+      "type": "base",
+      "system": false,
+      "schema": [
+        {
+          "system": false,
+          "id": "t5hfdkxl",
+          "name": "sessionDate",
+          "type": "date",
+          "required": false,
+          "unique": false,
+          "options": {
+            "min": "",
+            "max": ""
+          }
+        },
+        {
+          "system": false,
+          "id": "d8j2tezd",
+          "name": "cardsTrained",
+          "type": "relation",
+          "required": false,
+          "unique": false,
+          "options": {
+            "collectionId": "6mpr0zcsa99a0zm",
+            "cascadeDelete": false,
+            "minSelect": null,
+            "maxSelect": null,
+            "displayFields": []
+          }
+        },
+        {
+          "system": false,
+          "id": "tppdwvgg",
+          "name": "deck",
+          "type": "relation",
+          "required": false,
+          "unique": false,
+          "options": {
+            "collectionId": "u9pul9c8rrrq201",
+            "cascadeDelete": false,
+            "minSelect": null,
+            "maxSelect": 1,
+            "displayFields": []
+          }
+        }
+      ],
+      "indexes": [],
+      "listRule": null,
+      "viewRule": null,
+      "createRule": null,
+      "updateRule": null,
+      "deleteRule": null,
+      "options": {}
     }
   ];
 

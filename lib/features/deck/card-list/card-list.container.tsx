@@ -1,4 +1,4 @@
-import { View, YStack } from 'tamagui';
+import { YStack } from 'tamagui';
 
 import { CardList } from './card-list.component';
 import { useCardListQuery } from './card-list.hooks';
