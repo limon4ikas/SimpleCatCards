@@ -6,6 +6,12 @@ import { Text } from '../../components';
 import { FlashcardsResponse } from '../../types';
 import { useCardListQuery } from '../deck/card-list/card-list.hooks';
 
+const getSortedCards = (cards: FlashcardsResponse[]) => {
+  return cards.sort(
+    (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime(),
+  );
+};
+
 type ReviewContainerProps = {
   deckId: string;
 };
@@ -28,5 +34,10 @@ export function ReviewContainer({ deckId }: ReviewContainerProps) {
 
   if (!cards) return <Text>No cards!!!</Text>;
 
-  return <ReviewSession cards={cards} onCardGrade={handlePractiseCard} />;
+  return (
+    <ReviewSession
+      cards={getSortedCards(cards)}
+      onCardGrade={handlePractiseCard}
+    />
+  );
 }
