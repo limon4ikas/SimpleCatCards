@@ -18,6 +18,7 @@ export function CreateDeckScreen() {
             fontWeight: '600',
             fontSize: 19,
           },
+          headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity>
               <Text
