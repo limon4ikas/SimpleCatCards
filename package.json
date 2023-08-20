@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "TAMAGUI_TARGET=native expo start --dev-client",
-    "android": "TAMAGUI_TARGET=native expo start --dev-client --android",
-    "ios": "TAMAGUI_TARGET=native expo start --dev-client --ios",
+    "android": "TAMAGUI_TARGET=native expo run:android",
+    "ios": "TAMAGUI_TARGET=native expo run:ios",
     "build-ios": "eas build -p ios --profile simulator --local",
     "build-android": "eas build -p android --profile simulator --local",
     "typegen": "pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./lib/types/pocketbase-types.ts && prettier --write ./lib/types/pocketbase-types.ts",
