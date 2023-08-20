@@ -20,6 +20,8 @@ const CardFrame = styled(Stack, {
   elevationAndroid: 15,
   padding: '$4',
   context: CardContext,
+  pressStyle: { scale: 0.95 },
+  animation: 'quick',
   variants: { size: { large: { px: '$4', py: '$3' } } } as const,
 });
 
