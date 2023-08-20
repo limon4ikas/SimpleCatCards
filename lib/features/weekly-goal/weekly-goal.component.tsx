@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
-import { Flame, Check } from 'lucide-react-native';
 import { YStack, XStack, View, getTokens } from 'tamagui';
 
-import { Card, Text } from '../../components';
+import { Card, Text, Icon } from '../../components';
 import { getCurrentWeekdays } from '../../utils';
 
 export function WeeklyGoal() {
@@ -47,7 +46,7 @@ function WeekDayCheckMark(props: WeekDayCheckMarkProps) {
         alignItems="center"
         justifyContent="center"
       >
-        <Check size={20} color="white" />
+        <Icon name="Check" size={20} color="white" />
       </View>
       <Text type="footnote">{format(day, 'EEE')}</Text>
     </YStack>
@@ -62,7 +61,11 @@ function LearningStreak({ streak }: LearningStreakProps) {
   return (
     <YStack gap="$2">
       <XStack gap="$1" alignItems="center" justifyContent="center">
-        <Flame size={22} color={getTokens().color.$orange10Light.val} />
+        <Icon
+          name="Flame"
+          size={22}
+          color={getTokens().color.$orange10Light.val}
+        />
         <Text type="subhead" alignSelf="flex-end">
           {streak} streak
         </Text>

@@ -1,7 +1,6 @@
-import { Layers } from 'lucide-react-native';
 import { XStack, YStack, getTokenValue } from 'tamagui';
 
-import { Card, Text } from '../../../components';
+import { Card, Text, Icon } from '../../../components';
 import { FlashcardsResponse } from '../../../types';
 
 export type CardListProps = {
@@ -16,7 +15,11 @@ export function CardList({ cards }: CardListProps) {
       <XStack justifyContent="space-between" alignItems="center" mb="$3">
         <Text type="title-1">Cards</Text>
         <XStack alignItems="center" gap="$2">
-          <Layers size={24} color={getTokenValue('$blue10Light', 'color')} />
+          <Icon
+            name="Layers"
+            size={24}
+            color={getTokenValue('$blue10Light', 'color')}
+          />
           <Text type="callout">{cards.length} cards</Text>
         </XStack>
       </XStack>

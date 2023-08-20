@@ -1,10 +1,9 @@
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
-import { Plus } from 'lucide-react-native';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { ScrollView, View, YStack } from 'tamagui';
 
 import { CardListContainer } from './card-list';
-import { Button } from '../../components';
+import { Button, Icon } from '../../components';
 import { DeckScreenParams } from '../../types';
 
 export function DeckScreen() {
@@ -25,7 +24,7 @@ export function DeckScreen() {
                 asChild
               >
                 <TouchableOpacity {...props}>
-                  <Plus />
+                  <Icon name="Plus" />
                 </TouchableOpacity>
               </Link>
             ),

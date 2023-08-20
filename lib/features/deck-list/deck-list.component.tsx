@@ -1,7 +1,6 @@
 import { Feather } from '@expo/vector-icons';
 import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'expo-router';
-import { Trash } from 'lucide-react-native';
 import { ReactNode, useState } from 'react';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -16,7 +15,7 @@ import Animated, {
 import { View, XStack, YStack, getTokens } from 'tamagui';
 
 import { useDeckList } from './deck-list.hooks';
-import { Card, Text, TextInput } from '../../components';
+import { Card, Icon, Text, TextInput } from '../../components';
 import { DecksResponse } from '../../types';
 
 export type DeckListProps = {
@@ -154,7 +153,11 @@ function DeckListItem(props: DeckListItemProps) {
       </GestureDetector>
       <View position="absolute" right={10} top="30%">
         <TouchableOpacity onPress={() => onDelete?.(id)}>
-          <Trash size={24} color={getTokens().color.$red10Light.val} />
+          <Icon
+            name="Trash"
+            size={24}
+            color={getTokens().color.$red10Light.val}
+          />
         </TouchableOpacity>
       </View>
     </Animated.View>
