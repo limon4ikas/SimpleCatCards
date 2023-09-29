@@ -37,21 +37,24 @@ export function GradeChoice({
     >
       {state === 'grade-visible' ? (
         GRADE_CHOICES.map((grade) => (
-          <Animated.View key={grade.grade} entering={FadeIn} exiting={FadeOut}>
-            <View
-              px="$2"
-              bg={grade.color}
-              borderRadius="$3"
-              py="$2"
-              paddingHorizontal="$4"
-            >
-              <TouchableOpacity onPress={() => onGradeChoice(grade)}>
+          <TouchableOpacity
+            key={grade.grade}
+            onPress={() => onGradeChoice(grade)}
+          >
+            <Animated.View entering={FadeIn} exiting={FadeOut}>
+              <View
+                px="$2"
+                bg={grade.color}
+                borderRadius="$3"
+                py="$2"
+                paddingHorizontal="$4"
+              >
                 <Text type="title-3" color="white">
                   {grade.label}
                 </Text>
-              </TouchableOpacity>
-            </View>
-          </Animated.View>
+              </View>
+            </Animated.View>
+          </TouchableOpacity>
         ))
       ) : state === 'flip-visible' ? (
         <Animated.View entering={FadeIn.delay(200)} exiting={FadeOut}>

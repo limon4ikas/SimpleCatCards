@@ -1,13 +1,14 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Admin, BaseAuthStore, Record } from 'pocketbase';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Admin, BaseAuthStore, Record } from "pocketbase";
 
 export class AsyncAuthStore extends BaseAuthStore {
   /**
    * @param {String} storageKey
+   * @param queue
    */
   constructor(
-    public storageKey: string = 'pb_auth',
-    private queue: any[] = [],
+    public storageKey: string = "pb_auth",
+    private queue: any[] = []
   ) {
     super();
 
@@ -32,7 +33,7 @@ export class AsyncAuthStore extends BaseAuthStore {
     this._enqueue(() => {
       return AsyncStorage.setItem(
         this.storageKey,
-        JSON.stringify({ token, model }),
+        JSON.stringify({ token, model })
       );
     });
   }

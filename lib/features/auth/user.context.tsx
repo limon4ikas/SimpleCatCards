@@ -20,7 +20,13 @@ export function useAuth() {
   );
 
   useEffect(() => {
-    const cleanup = pb.authStore.onChange((token, model) => {
+    if (pb.authStore.isValid) return;
+
+    pb.authStore.clear();
+  }, []);
+
+  useEffect(() => {
+    const cleanup = pb.authStore.onChange((_token, model) => {
       setUser(model as unknown as UsersResponse);
     }, true);
 

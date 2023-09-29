@@ -1,15 +1,15 @@
-import { addDays } from 'date-fns';
-import { SuperMemoItem } from 'supermemo';
+import { addDays } from "date-fns";
+import { SuperMemoItem } from "supermemo";
 
-import { pb } from './pb';
+import { pb } from "./pb";
 import {
   Collections,
   DeckWithCards,
   DecksRecord,
   DecksResponse,
   FlashcardsRecord,
-  FlashcardsResponse,
-} from '../../types';
+  FlashcardsResponse
+} from "../../types";
 
 export const api = {
   getDecks() {
@@ -21,23 +21,24 @@ export const api = {
   createDeck(
     deck: Pick<
       DecksRecord,
-      'color' | 'name' | 'description' | 'user' | 'lastEdited'
-    >,
+      "color" | "name" | "description" | "user" | "lastEdited"
+    >
   ) {
     return pb.collection(Collections.Decks).create<DecksResponse>(deck);
   },
   getAuthProviders() {
     return pb.collection(Collections.Users).listAuthMethods();
   },
-  getRecentlyReviewed() {
-    return pb
+  async getRecentlyReviewed() {
+    const data = await pb
       .collection(Collections.Decks)
-      .getList<DecksResponse>(1, 4, { sort: '-lastAttempted' })
-      .then((d) => d.items);
+      .getList<DecksResponse>(1, 4, { sort: "-lastAttempted" });
+
+    return data.items;
   },
   getDeckWithCards(deckId: string) {
     return pb.collection(Collections.Decks).getOne<DeckWithCards>(deckId, {
-      expand: 'cards',
+      expand: "cards"
     });
   },
   async createCards(deckId: string, cards: { front: string; back: string }[]) {
@@ -48,7 +49,7 @@ export const api = {
       deck: deckId,
       interval: 0,
       repetition: 0,
-      efactor: 2.5,
+      efactor: 2.5
     }));
 
     const currentDeck = await pb
@@ -60,33 +61,33 @@ export const api = {
       return pb
         .collection(Collections.Flashcards)
         .create<FlashcardsResponse>(record, {
-          $autoCancel: false,
+          $autoCancel: false
         });
     });
 
     const createdCardIds = (await Promise.all(createdCardsPromises)).map(
-      (card) => card.id,
+      (card) => card.id
     );
 
     return pb.collection(Collections.Decks).update<DecksResponse>(
       currentDeck.id,
       {
-        cards: [...currentDeck.cards, ...createdCardIds],
+        cards: [...currentDeck.cards, ...createdCardIds]
       },
-      { $autoCancel: false },
+      { $autoCancel: false }
     );
   },
-  async practiceCard (item:{ cardId: string; deckId: string; update: SuperMemoItem }) {
+  async practiceCard(item: { cardId: string; deckId: string; update: SuperMemoItem }) {
 
     const updatedCard = await pb.collection(Collections.Flashcards).update<FlashcardsResponse>(item.cardId, {
       ...item.update,
       dueDate: addDays(new Date(), item.update.interval).toISOString()
-    })
+    });
 
     await pb.collection(Collections.Decks).update<DecksResponse>(item.deckId, {
       lastAttempted: new Date().toISOString()
-    })
+    });
 
-    return updatedCard
+    return updatedCard;
   }
 } as const;
