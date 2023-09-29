@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Admin, BaseAuthStore, Record } from "pocketbase";
+import { AuthModel, BaseAuthStore } from "pocketbase";
 
 export class AsyncAuthStore extends BaseAuthStore {
   /**
@@ -27,7 +27,7 @@ export class AsyncAuthStore extends BaseAuthStore {
   /**
    * @inheritdoc
    */
-  save(token: string, model: Record | Admin | null) {
+  save(token: string, model: AuthModel) {
     super.save(token, model);
 
     this._enqueue(() => {

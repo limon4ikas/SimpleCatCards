@@ -9606,10 +9606,10 @@ pngjs@^3.3.0:
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
   integrity sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
 
-pocketbase-typegen@^1.1.12:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/pocketbase-typegen/-/pocketbase-typegen-1.1.12.tgz#d86e98fb260d3f8887492722fac22334587fef1c"
-  integrity sha512-4u7sie1+cQB1B7Uzu5w/04CjnFObklsOZey3HXnIo4yagPwkTn7IVa2h21klA7XOJvOtBKCCGt9jmHrVl5obqQ==
+pocketbase-typegen@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/pocketbase-typegen/-/pocketbase-typegen-1.1.13.tgz#c078fb36060284fbee42eca0c28cb4bc7cc9d6f7"
+  integrity sha512-nqN1/mkClz6xoEbO2OZDQ3VT3b1SoNb9Q0/rmIhCCqsaJ61Ske3JVgP4jseFy96AldvgS0lEj++V16+iznfh/Q==
   dependencies:
     commander "^9.4.1"
     cross-fetch "^3.1.5"
@@ -9618,10 +9618,10 @@ pocketbase-typegen@^1.1.12:
     sqlite "^4.1.2"
     sqlite3 "^5.1.4"
 
-pocketbase@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/pocketbase/-/pocketbase-0.16.0.tgz#156c05a26b126b97a202b7173e9c1544f090eff1"
-  integrity sha512-sndPu4Mbu1Y2VefvO2gIa/No5aIdP6E5br9HUGomvDYSfkmGfBxJNkivJSSKlr9KwWnaF8otf14304UUeFGOrA==
+pocketbase@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/pocketbase/-/pocketbase-0.18.0.tgz#2e1d2f53b5e68b273f2bf09f3e61031e38024a17"
+  integrity sha512-09ri0Rnm4JjboU4OJeibd6pgvKi4DPg/r/Uu/QI3mKSZsrROoMT75zyiOldbBBMWZUDG1TRlv6BjQj30SFsrVw==
 
 postcss-value-parser@^4.2.0:
   version "4.2.0"

@@ -30,13 +30,24 @@ export function useOAuth() {
 
       const url = new URL(strUrl);
 
-      if (!url.searchParams.has('code')) return;
+      if (url.searchParams.get('error_description')) {
+        console.error(url.searchParams.get('error_description'));
+        return;
+      }
+
+      if (!url.searchParams.has('code')) {
+        console.error('No code found in URL');
+        return;
+      }
 
       const providerStr = await AsyncStorage.getItem('provider').catch(
-        console.log,
+        console.error,
       );
 
-      if (!providerStr) return;
+      if (!providerStr) {
+        console.error('No provider found in async storage');
+        return;
+      }
 
       const provider = JSON.parse(providerStr) as AuthProviderInfo;
 
@@ -52,7 +63,7 @@ export function useOAuth() {
           provider.codeVerifier,
           config.EXPO_PUBLIC_REDIRECT_URL,
         )
-        .catch(console.log);
+        .catch(console.error);
 
       router.push('/(home)/decks/');
     })();

@@ -44,7 +44,7 @@
     "expo-system-ui": "~2.4.0",
     "expo-web-browser": "~12.3.2",
     "lucide-react-native": "^0.268.0",
-    "pocketbase": "^0.16.0",
+    "pocketbase": "^0.18.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.4",
@@ -73,7 +73,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^29.6.2",
     "jest-expo": "~49.0.0",
-    "pocketbase-typegen": "^1.1.12",
+    "pocketbase-typegen": "^1.1.13",
     "prettier": "^3.0.1",
     "react-test-renderer": "18.2.0",
     "typescript": "^5.1.6"

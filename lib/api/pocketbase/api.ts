@@ -4,9 +4,9 @@ import { SuperMemoItem } from "supermemo";
 import { pb } from "./pb";
 import {
   Collections,
-  DeckWithCards,
   DecksRecord,
   DecksResponse,
+  DeckWithCards,
   FlashcardsRecord,
   FlashcardsResponse
 } from "../../types";
@@ -61,7 +61,7 @@ export const api = {
       return pb
         .collection(Collections.Flashcards)
         .create<FlashcardsResponse>(record, {
-          $autoCancel: false
+          requestKey: null
         });
     });
 
@@ -74,7 +74,7 @@ export const api = {
       {
         cards: [...currentDeck.cards, ...createdCardIds]
       },
-      { $autoCancel: false }
+      { requestKey: null }
     );
   },
   async practiceCard(item: { cardId: string; deckId: string; update: SuperMemoItem }) {

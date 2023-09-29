@@ -34,36 +34,36 @@ export type AuthSystemFields<T = never> = {
 // Record types for each collection
 
 export type DecksRecord = {
-  name: string;
-  description?: string;
-  lastEdited?: IsoDateString;
-  lastAttempted?: IsoDateString;
-  color: string;
   cards?: RecordIdString[];
-  user?: RecordIdString;
+  color: string;
+  description?: string;
+  lastAttempted?: IsoDateString;
+  lastEdited?: IsoDateString;
+  name: string;
   sessions?: RecordIdString[];
+  user?: RecordIdString;
 };
 
 export type FlashcardsRecord = {
-  front: string;
   back: string;
   deck?: RecordIdString;
+  dueDate: IsoDateString;
+  efactor?: number;
+  front: string;
   interval?: number;
   repetition?: number;
-  efactor?: number;
-  dueDate: IsoDateString;
 };
 
 export type SessionsRecord = {
-  sessionDate?: IsoDateString;
   cardsTrained?: RecordIdString[];
   deck?: RecordIdString;
+  sessionDate?: IsoDateString;
 };
 
 export type UsersRecord = {
-  name?: string;
   avatar?: string;
   decks?: RecordIdString[];
+  name?: string;
 };
 
 // Response types include system fields and match responses from the PocketBase API
