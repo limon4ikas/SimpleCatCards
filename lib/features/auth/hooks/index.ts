@@ -16,7 +16,7 @@ import { Collections } from '../../../types';
 export function useQueryAuthMethods() {
   return useQuery<AuthMethodsList, ClientResponseError>({
     queryKey: queries.authMethods._def,
-    queryFn: () => api.getAuthProviders(),
+    queryFn: api.getAuthProviders,
   });
 }
 

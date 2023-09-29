@@ -9,7 +9,7 @@ export const unstable_settings = {
 export default function DecksLayout() {
   return (
     <MyStack>
-      <Stack.Screen name="overview" options={{ title: 'Overview' }} />
+      <Stack.Screen name="overview" options={{ title: '' }} />
       <Stack.Screen name="index" options={{ title: 'Decks' }} />
       <Stack.Screen name="[id]/index" options={{ title: 'Deck' }} />
       <Stack.Screen name="[id]/review" options={{ title: 'Review' }} />

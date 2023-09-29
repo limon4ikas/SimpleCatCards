@@ -7,6 +7,6 @@ import { DecksResponse } from '../../types';
 export function useQueryRecentlyReviewed() {
   return useQuery<DecksResponse[], ClientResponseError>({
     queryKey: queries.decks.recentlyReviewed.queryKey,
-    queryFn: () => api.getRecentlyReviewed(),
+    queryFn: api.getRecentlyReviewed,
   });
 }

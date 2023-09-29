@@ -60,7 +60,11 @@ export function ReviewSession({ cards, onCardGrade }: ReviewProps) {
   );
 
   function handleGradeChoice(grade: Grade) {
-    dispatch({ type: 'next' });
+    if (!state.cards[state.currentCardIndex + 1]) {
+      dispatch({ type: 'next' });
+    } else {
+      dispatch({ type: 'next' });
+    }
 
     if (!state.currentCard) return;
 

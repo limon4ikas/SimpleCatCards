@@ -1,4 +1,5 @@
 import { ScrollViewStyleReset } from 'expo-router/html';
+import React from 'react';
 
 // This file is web-only and used to configure the root HTML for every
 // web page during static rendering.
@@ -13,7 +14,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
 
         {/* 
           This viewport disables scaling which makes the mobile website act more like a native app.
-          However this does reduce built-in accessibility. If you want to enable scaling, use this instead:
+          However, this does reduce built-in accessibility. If you want to enable scaling, use this instead:
             <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         */}
         <meta
@@ -28,6 +29,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
 
         {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
+        <title>App</title>
         {/* Add any additional <head> elements that you want globally available on web... */}
       </head>
       <body>{children}</body>

@@ -1,19 +1,22 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthProviderInfo } from 'pocketbase';
 import { ActivityIndicator, Linking } from 'react-native';
-import { Button, YStack, Text } from 'tamagui';
+import { Button, Text, YStack } from 'tamagui';
 
 import { useOAuth, useQueryAuthMethods } from './hooks';
 import { config } from '../../config';
 
 export function LoginFormContainer() {
   const { data, status, error } = useQueryAuthMethods();
+
   useOAuth();
 
   async function handleProviderAuthClick(provider: AuthProviderInfo) {
     await AsyncStorage.setItem('provider', JSON.stringify(provider));
 
-    Linking.openURL(`${provider.authUrl}${config.EXPO_PUBLIC_REDIRECT_URL}`);
+    await Linking.openURL(
+      `${provider.authUrl}${config.EXPO_PUBLIC_REDIRECT_URL}`,
+    );
   }
 
   if (status === 'loading') {
